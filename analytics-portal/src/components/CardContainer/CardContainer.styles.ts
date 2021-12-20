@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,15 +7,9 @@ export const Wrapper = styled.div`
   justify-content: center;
   /* background-color: gray; */
   width: 80vw;
+`;
 
-  .card-container {
-    width: 100%;
-    margin: 0.5rem;
-  }
-
-  .line {
-    height: 1px;
-    width: 90%;
-    background-color: ${colors.lineColor};
-  }
+export const Container = styled.div`
+  width: 100%;
+  margin: 0.5rem;
 `;

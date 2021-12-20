@@ -1,7 +1,11 @@
 import { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { Wrapper, StyledButton, StyledInput } from "./Popup.styles";
+import {
+  InputContainer,
+  Wrapper,
+  StyledButton,
+  StyledInput,
+} from "./Popup.styles";
 
 function Popup({
   isOpen,
@@ -17,8 +21,7 @@ function Popup({
   return (
     <Wrapper>
       <Dialog onClose={hide} open={isOpen}>
-        <DialogTitle>Add Campaign</DialogTitle>
-        <div className="input-container">
+        <InputContainer>
           <StyledInput
             variant="outlined"
             label="Campaign Name"
@@ -26,14 +29,14 @@ function Popup({
             value={campaignName}
             onChange={(e) => setCampaignName(e.target.value)}
           ></StyledInput>
-        </div>
-        <StyledButton
-          onClick={() => {
-            onAdd(campaignName);
-          }}
-        >
-          Add
-        </StyledButton>
+          <StyledButton
+            onClick={() => {
+              onAdd(campaignName);
+            }}
+          >
+            Add
+          </StyledButton>
+        </InputContainer>
       </Dialog>
     </Wrapper>
   );

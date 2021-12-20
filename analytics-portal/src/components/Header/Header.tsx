@@ -12,8 +12,11 @@ function Header() {
   return (
     <StyledHeader>
       <Breadcrumbs aria-label="breadcrumb">
-        <StyledLink to={pathname}>
-          {capitalize(pathname.substring(1))}
+        <StyledLink to={pathname.substring(1).split("/")[0]}>
+          <h2>{capitalize(pathname.substring(1).split("/")[0])}</h2>
+        </StyledLink>
+        <StyledLink to={pathname.substring(1)}>
+          <h2>{pathname.substring(1).split("/")[1]}</h2>
         </StyledLink>
       </Breadcrumbs>
     </StyledHeader>

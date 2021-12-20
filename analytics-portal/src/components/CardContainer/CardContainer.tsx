@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useAPI } from "../../context/Store";
 import Card from "../Card/Card";
-import { Wrapper } from "./CardContainer.styles";
+import { Container, Wrapper } from "./CardContainer.styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import { getAvgInstalls, getAvgRevenue } from "../../utils/utilities";
-import { AnalyticsDataInterface } from "../../context/Interfaces";
+import { Line } from "../../views/Details/Details.styles";
 
 function CardContainer() {
   const { analyticsData, isLoading, errorMessage } = useAPI();
   const [isAlertVisible, setisAlertVisible] = useState(false);
-  const [activeCampaigns, setactiveCampaigns] = useState<typeof analyticsData>(
+  const [activeCampaigns, setActiveCampaigns] = useState<typeof analyticsData>(
     []
   );
   const [inactiveCampaigns, setInactiveCampaigns] = useState<
@@ -21,7 +21,7 @@ function CardContainer() {
     setisAlertVisible(false);
   }
 
-  function populateCards(cardList: AnalyticsDataInterface[]) {
+  function populateCards(cardList: typeof analyticsData) {
     return cardList.map((item) => {
       //TODO find out what is campaign and the number above it.
       return (
@@ -47,7 +47,7 @@ function CardContainer() {
       //dividing active and inactive campaigns into their own array.
       analyticsData.map((item, index) => {
         if (item.active) {
-          setactiveCampaigns((prev) => [...prev, item]);
+          setActiveCampaigns((prev) => [...prev, item]);
         } else {
           setInactiveCampaigns((prev) => [...prev, item]);
         }
@@ -61,11 +61,9 @@ function CardContainer() {
         <LinearProgress />
       ) : (
         <>
-          <div className="card-container">{populateCards(activeCampaigns)}</div>
-          <hr className="line" />
-          <div className="card-container">
-            {populateCards(inactiveCampaigns)}
-          </div>
+          <Container>{populateCards(activeCampaigns)}</Container>
+          <Line />
+          <Container>{populateCards(inactiveCampaigns)}</Container>
         </>
       )}
       <Snackbar

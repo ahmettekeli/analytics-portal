@@ -21,3 +21,8 @@ export function getAvgInstalls(
     item.installs.reduce((acc, ins) => acc + ins.value, 0) / length;
   return Number(avgInstalls.toFixed(2));
 }
+
+export function formatDate(date: Date): string {
+  let dateArr = date.toString().split("T")[0].split("-");
+  return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
+}

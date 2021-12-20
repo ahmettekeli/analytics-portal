@@ -9,21 +9,24 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+`;
 
-  .input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem;
-    padding: 1rem;
-  }
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 25vh;
+  margin: 0 1rem;
 `;
 
 export const StyledButton = styled(Button)`
   && {
     color: white;
-    margin: 1rem;
+    width: 100%;
+    padding: 0;
+    margin: 0.5rem 0;
     background-color: ${colors.addButton};
     :hover {
       background-color: ${colors.addButtonHover};
@@ -33,9 +36,10 @@ export const StyledButton = styled(Button)`
 
 export const StyledInput = styled(TextField)`
   && {
-    margin: 1rem;
+    width: 100%;
+    margin: 0.5rem;
   }
-  /* background: white; */
+
   & label.Mui-focused {
     color: ${colors.inputBorderFocused};
   }
