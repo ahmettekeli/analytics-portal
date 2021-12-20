@@ -1,26 +1,63 @@
-import { createContext, Dispatch, ReactNode, useReducer } from "react";
-import { AnalyticsDataInterface, AnalyticsStateInterface } from "./Interfaces";
-import Reducer from "./Reducer";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
+import { AnalyticsDataInterface } from "./Interfaces";
+import { urls } from "../constants"; //TODO fix process.env.REACT_APP_API_URL
 
 const initialState = {
   analyticsData: [] as AnalyticsDataInterface[],
+  isLoading: true,
+  errorMessage: null,
 };
 
-//TODO there is a better way to implement context.
 export const Context = createContext<{
-  state: AnalyticsStateInterface;
-  dispatch: Dispatch<any>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
+  analyticsData: AnalyticsDataInterface[];
+  isLoading: boolean;
+  errorMessage: string | null;
+}>(initialState);
 
-//TODO make sure you know why you used useReducer here. You already have state and dispatch in Context.
 function AnalyticsProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(Reducer, initialState);
+  const [analyticsData, setAnalyticsData] =
+    useState<AnalyticsDataInterface[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, seterrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch(urls.apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("fetched data:", data);
+        setAnalyticsData(data as unknown as AnalyticsDataInterface[]);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        seterrorMessage(err.message);
+      });
+  }, []);
+
   return (
-    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
+    <Context.Provider
+      value={{
+        analyticsData: analyticsData as AnalyticsDataInterface[],
+        isLoading,
+        errorMessage,
+      }}
+    >
+      {children}
+    </Context.Provider>
   );
 }
 
 export default AnalyticsProvider;
+
+export function useAPI() {
+  const context = useContext(Context);
+  if (!context) {
+    throw new Error("Context must be used within a Provider");
+  }
+  return context;
+}

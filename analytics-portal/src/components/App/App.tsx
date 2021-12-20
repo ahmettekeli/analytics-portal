@@ -4,7 +4,6 @@ import Home from "../../views/Home/Home";
 import Overview from "../../views/Overview/Overview";
 import Details from "../../views/Details/Details";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import AnalyticsProvider from "../../context/Store";
 import { routes } from "../../constants";
 
@@ -20,7 +19,6 @@ function App() {
             <Route path={routes.details} element={<Details />} />
           </Routes>
         </AnalyticsProvider>
-        <Footer />
       </StyledApp>
     </Router>
   );

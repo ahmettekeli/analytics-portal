@@ -1,2 +1,0 @@
-//TODO Footer tests.
-export {};
