@@ -17,14 +17,14 @@ export const Row = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin: 0 0.5rem;
-  width: 90%;
+  width: 75%;
   height: 50%;
 `;
 
 export const RowItem = styled.div`
   width: 50%;
   margin: 1rem;
-  background-color: lightgray;
+  /* background-color: lightgray; */
 `;
 
 export const CampaignControl = styled.div`
@@ -37,28 +37,10 @@ export const CampaignControl = styled.div`
   padding: 1rem 0;
 `;
 
-export const Line = styled.hr`
+export const StyledLine = styled.hr`
   height: 1px;
   width: 40%;
   background-color: ${colors.lineColor};
-`;
-
-export const ProfileContainer = styled.div`
-  display: flex;
-  justify-content: left;
-  margin: 1rem;
-  padding: 1rem;
-  background-color: pink;
-  width: 100%;
-  height: 30%;
-`;
-
-export const ProfileItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  margin: 0 1rem;
-  background-color: red;
 `;
 
 export const StyledSelect = styled(Select)``;

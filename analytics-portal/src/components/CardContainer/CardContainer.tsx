@@ -5,7 +5,7 @@ import { Container, Wrapper } from "./CardContainer.styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import { getAvgInstalls, getAvgRevenue } from "../../utils/utilities";
-import { Line } from "../../views/Details/Details.styles";
+import { StyledLine } from "../../views/Details/Details.styles";
 
 function CardContainer() {
   const { analyticsData, isLoading, errorMessage } = useAPI();
@@ -45,7 +45,7 @@ function CardContainer() {
   useEffect(() => {
     if (!isLoading) {
       //dividing active and inactive campaigns into their own array.
-      analyticsData.map((item, index) => {
+      analyticsData.forEach((item, index) => {
         if (item.active) {
           setActiveCampaigns((prev) => [...prev, item]);
         } else {
@@ -62,7 +62,7 @@ function CardContainer() {
       ) : (
         <>
           <Container>{populateCards(activeCampaigns)}</Container>
-          <Line />
+          <StyledLine />
           <Container>{populateCards(inactiveCampaigns)}</Container>
         </>
       )}

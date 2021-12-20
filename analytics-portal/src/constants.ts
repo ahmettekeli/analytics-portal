@@ -20,6 +20,7 @@ export const colors: {
   inputBorder: string;
   inputBorderFocused: string;
   lineColor: string;
+  lineChartColor: string;
 } = {
   cardBackground: "#eeeeee",
   cardText: "#000000",
@@ -32,6 +33,7 @@ export const colors: {
   inputBorder: "#CFE6C8",
   inputBorderFocused: "#A0EB86",
   lineColor: "#EAEAEA",
+  lineChartColor: "#7D7D7D",
 };
 
 export const urls: {

@@ -7,20 +7,28 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Popup from "../../components/Popup/Popup";
 import {
   CampaignControl,
-  Line,
-  ProfileContainer,
-  ProfileItem,
   Row,
   RowItem,
   Wrapper,
+  StyledLine,
   StyledSelect,
 } from "./Details.styles";
 import { useAPI } from "../../context/Store";
 import { formatDate, isNameValid } from "../../utils/utilities";
 import { AnalyticsDataInterface } from "../../context/Interfaces";
 import { StyledButton } from "../../components/Popup/Popup.styles";
+import LineChart from "../../components/LineChart/LineChart";
+import { colors } from "../../constants";
+import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
 
 function Details() {
+  type ChartDataType = {
+    installLabels: string[];
+    installData: number[];
+    revenueLabels: string[];
+    revenueData: number[];
+  };
+
   const { name } = useParams();
   const { analyticsData, isLoading, errorMessage } = useAPI();
   const [activeCampaigns, setActiveCampaigns] = useState<
@@ -35,6 +43,8 @@ function Details() {
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
+
+  const [chartData, setChartData] = useState<ChartDataType>();
 
   function showPopup(): void {
     setIsPopupOpen(true);
@@ -86,6 +96,15 @@ function Details() {
     });
   }
 
+  function getChartData(campaign: AnalyticsDataInterface): ChartDataType {
+    return {
+      installLabels: campaign.installs.map((item) => item.day),
+      installData: campaign.installs.map((item) => item.value),
+      revenueLabels: campaign.revenue.map((item) => item.day),
+      revenueData: campaign.revenue.map((item) => item.value),
+    };
+  }
+
   useEffect(() => {
     if (!isLoading) {
       const tempActiveCampaigns = analyticsData.filter((item) => item.active);
@@ -94,29 +113,39 @@ function Details() {
       );
       setActiveCampaigns(tempActiveCampaigns as AnalyticsDataInterface[]);
       setCurrentCampaign(tempCurrentCampaign);
+      setChartData(getChartData(tempCurrentCampaign as AnalyticsDataInterface));
     }
-  }, [isLoading, analyticsData]);
+  }, [isLoading, analyticsData, name]);
   return (
     <Wrapper>
-      Details page: {name}
-      <ProfileContainer>
-        <ProfileItem>
-          <img src={currentCampaign?.icon} alt={currentCampaign?.name} />
-        </ProfileItem>
-        <ProfileItem>
-          <h3>{name}</h3>
-          <h5>{`Created at ${
-            currentCampaign?.createdAt
-              ? formatDate(currentCampaign?.createdAt as Date)
-              : "..."
-          }`}</h5>
-        </ProfileItem>
-      </ProfileContainer>
+      <OverviewProfile
+        imgUrl={currentCampaign?.icon}
+        name={currentCampaign?.name}
+        creationDate={
+          currentCampaign?.createdAt
+            ? formatDate(currentCampaign?.createdAt as Date)
+            : "..."
+        }
+      />
       <Row>
-        <RowItem>Installs</RowItem>
-        <RowItem>Revenue</RowItem>
+        <RowItem>
+          <LineChart
+            labels={chartData?.installLabels}
+            data={chartData?.installData}
+            color={colors.lineChartColor}
+            dataLabel="Installs"
+          />
+        </RowItem>
+        <RowItem>
+          <LineChart
+            labels={chartData?.revenueLabels}
+            data={chartData?.revenueData}
+            color={colors.lineChartColor}
+            dataLabel="revenue"
+          />
+        </RowItem>
       </Row>
-      <Line />
+      <StyledLine />
       <Row>
         <RowItem>
           <CampaignControl>
