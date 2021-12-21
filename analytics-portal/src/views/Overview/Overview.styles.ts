@@ -1,2 +1,6 @@
 import styled from "styled-components";
-//TODO Overview page styling.
+import { motion } from "framer-motion";
+
+export const StyledMotionDiv = styled(motion.div)`
+  width: 90%;
+`;

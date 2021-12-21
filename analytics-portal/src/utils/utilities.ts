@@ -26,3 +26,16 @@ export function formatDate(date: Date): string {
   let dateArr = date.toString().split("T")[0].split("-");
   return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
 }
+
+export function generateCampaign() {
+  let campaign = {
+    createdAt: new Date(),
+    name: "",
+    icon: "",
+    active: true,
+    id: "",
+    installs: [],
+    revenue: [],
+  };
+  return campaign;
+}

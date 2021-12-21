@@ -1,4 +1,5 @@
-import { Wrapper, ProfileItem } from "./OverviewProfile.styles";
+import { Wrapper, ProfileItem, NameContainer } from "./OverviewProfile.styles";
+import capitalize from "lodash/capitalize";
 
 function OverviewProfile({
   imgUrl,
@@ -15,7 +16,7 @@ function OverviewProfile({
         <img src={imgUrl} alt={name} />
       </ProfileItem>
       <ProfileItem>
-        <h3>{name}</h3>
+        <NameContainer>{capitalize(name)}</NameContainer>
         <p>{`Created at ${creationDate}`}</p>
       </ProfileItem>
     </Wrapper>

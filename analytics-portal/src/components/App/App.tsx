@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { StyledApp } from "./App.styles";
 import Home from "../../views/Home/Home";
 import Overview from "../../views/Overview/Overview";
@@ -13,11 +19,14 @@ function App() {
       <StyledApp>
         <Header />
         <AnalyticsProvider>
-          <Routes>
-            <Route path={routes.home} element={<Home />} />
-            <Route path={routes.overview} element={<Overview />} />
-            <Route path={routes.details} element={<Details />} />
-          </Routes>
+          <AnimatePresence exitBeforeEnter>
+            <Routes>
+              <Route path={routes.home} element={<Home />} />
+              <Route path={routes.overview} element={<Overview />} />
+              <Route path={routes.details} element={<Details />} />
+              <Route path="*" element={<Navigate to="/404" />} />
+            </Routes>
+          </AnimatePresence>
         </AnalyticsProvider>
       </StyledApp>
     </Router>

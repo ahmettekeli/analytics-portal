@@ -20,6 +20,7 @@ import { StyledButton } from "../../components/Popup/Popup.styles";
 import LineChart from "../../components/LineChart/LineChart";
 import { colors } from "../../constants";
 import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
+import { StyledMotionDiv } from "../Overview/Overview.styles";
 
 function Details() {
   type ChartDataType = {
@@ -117,71 +118,73 @@ function Details() {
     }
   }, [isLoading, analyticsData, name]);
   return (
-    <Wrapper>
-      <OverviewProfile
-        imgUrl={currentCampaign?.icon}
-        name={currentCampaign?.name}
-        creationDate={
-          currentCampaign?.createdAt
-            ? formatDate(currentCampaign?.createdAt as Date)
-            : "..."
-        }
-      />
-      <Row>
-        <RowItem>
-          <LineChart
-            labels={chartData?.installLabels}
-            data={chartData?.installData}
-            color={colors.lineChartColor}
-            dataLabel="Installs"
-          />
-        </RowItem>
-        <RowItem>
-          <LineChart
-            labels={chartData?.revenueLabels}
-            data={chartData?.revenueData}
-            color={colors.lineChartColor}
-            dataLabel="revenue"
-          />
-        </RowItem>
-      </Row>
-      <StyledLine />
-      <Row>
-        <RowItem>
-          <CampaignControl>
-            <FormControl fullWidth>
-              <InputLabel id="campaign-select-label">Campaigns</InputLabel>
-              <StyledSelect
-                labelId="campaign-select-label"
-                id="campaign-select"
-                value={selectedCampaignName}
-                label="Campaign"
-                onChange={(e) => {
-                  onSelect(e.target.value as string);
-                }}
-              >
-                {populateMenuItems(activeCampaigns as typeof analyticsData)}
-              </StyledSelect>
-            </FormControl>
-            <StyledButton onClick={showPopup}>New Campaign</StyledButton>
-          </CampaignControl>
-        </RowItem>
-        <RowItem>{/* TODO dynamic graph visibility.*/}</RowItem>
-      </Row>
-      <Popup
-        isOpen={isPopupOpen}
-        hide={() => {
-          setIsPopupOpen(false);
-        }}
-        onAdd={handleAddingCampaign}
-      ></Popup>
-      <Snackbar
-        open={isNotificationVisible}
-        autoHideDuration={4000}
-        onClose={hideNotification}
-        message={notificationMessage}
-      />
-    </Wrapper>
+    <StyledMotionDiv>
+      <Wrapper>
+        <OverviewProfile
+          imgUrl={currentCampaign?.icon}
+          name={currentCampaign?.name}
+          creationDate={
+            currentCampaign?.createdAt
+              ? formatDate(currentCampaign?.createdAt as Date)
+              : "..."
+          }
+        />
+        <Row>
+          <RowItem>
+            <LineChart
+              labels={chartData?.installLabels}
+              data={chartData?.installData}
+              color={colors.lineChartColor}
+              dataLabel="Installs"
+            />
+          </RowItem>
+          <RowItem>
+            <LineChart
+              labels={chartData?.revenueLabels}
+              data={chartData?.revenueData}
+              color={colors.lineChartColor}
+              dataLabel="revenue"
+            />
+          </RowItem>
+        </Row>
+        <StyledLine />
+        <Row>
+          <RowItem>
+            <CampaignControl>
+              <FormControl fullWidth>
+                <InputLabel id="campaign-select-label">Campaigns</InputLabel>
+                <StyledSelect
+                  labelId="campaign-select-label"
+                  id="campaign-select"
+                  value={selectedCampaignName}
+                  label="Campaign"
+                  onChange={(e) => {
+                    onSelect(e.target.value as string);
+                  }}
+                >
+                  {populateMenuItems(activeCampaigns as typeof analyticsData)}
+                </StyledSelect>
+              </FormControl>
+              <StyledButton onClick={showPopup}>New Campaign</StyledButton>
+            </CampaignControl>
+          </RowItem>
+          <RowItem>{/* TODO dynamic graph visibility.*/}</RowItem>
+        </Row>
+        <Popup
+          isOpen={isPopupOpen}
+          hide={() => {
+            setIsPopupOpen(false);
+          }}
+          onAdd={handleAddingCampaign}
+        ></Popup>
+        <Snackbar
+          open={isNotificationVisible}
+          autoHideDuration={4000}
+          onClose={hideNotification}
+          message={notificationMessage}
+        />
+      </Wrapper>
+    </StyledMotionDiv>
   );
 }
 

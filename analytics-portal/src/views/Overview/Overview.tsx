@@ -1,10 +1,11 @@
+import { StyledMotionDiv } from "./Overview.styles";
 import CardContainer from "../../components/CardContainer/CardContainer";
 
 function Overview() {
   return (
-    <div>
+    <StyledMotionDiv>
       <CardContainer />
-    </div>
+    </StyledMotionDiv>
   );
 }
 
