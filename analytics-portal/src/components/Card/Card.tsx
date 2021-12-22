@@ -1,4 +1,5 @@
-import { Wrapper, StyledLink } from "./Card.styles";
+import { NameContainer, Wrapper, StyledLink } from "./Card.styles";
+import capitalize from "lodash/capitalize";
 
 function Card({
   imgUrl,
@@ -25,7 +26,7 @@ function Card({
           <img src={imgUrl} alt={name} />
         </StyledLink>
         <StyledLink to={`/overview/${name}`}>
-          <div>{name}</div>
+          <NameContainer>{capitalize(name)}</NameContainer>
         </StyledLink>
       </div>
       <div className={getClassName(isActive, "card-detail")}>

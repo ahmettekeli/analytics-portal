@@ -1,4 +1,6 @@
-export interface InstallInterface {
+import { actionTypes } from "./ActionTypes";
+
+export interface AppInstallInterface {
   day: string;
   value: number;
   id: string;
@@ -12,21 +14,52 @@ export interface RevenueInterface {
   appId: string;
 }
 
-export interface AnalyticsDataInterface {
+export interface CampaignInstallInterface {
+  day: string;
+  value: number;
+}
+
+export interface AppDataInterface {
   createdAt: Date;
   name: string;
   icon: string;
   active: boolean;
   id: string;
-  installs: InstallInterface[];
+  installs: AppInstallInterface[];
   revenue: RevenueInterface[];
 }
 
-export interface AnalyticsStateInterface {
-  analyticsData: AnalyticsDataInterface[];
+export interface CampaignDataInterface {
+  name: string;
+  installs: CampaignInstallInterface[];
+  id: number;
 }
 
-export interface ActionInterface {
-  type: string;
-  payload: any; //TODO: define the payload type
+export interface AnalyticsStateInterface {
+  appData: AppDataInterface[];
+  campaignData: CampaignDataInterface[];
+  isLoading: boolean;
+  errorMessage: string | null;
 }
+
+export type AppCampaignType = {
+  appData: AppDataInterface[];
+  campaignData: CampaignDataInterface[];
+};
+
+export interface ContextActionInterface {
+  type: actionTypes;
+  payload: CampaignDataInterface | AppDataInterface | AppCampaignType;
+}
+
+export type AppChartDataType = {
+  installLabels: string[];
+  installData: number[];
+  revenueLabels: string[];
+  revenueData: number[];
+};
+
+export type CampaignChartDataType = {
+  installLabels: string[];
+  installData: number[];
+};

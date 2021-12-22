@@ -2,7 +2,8 @@ import styled from "styled-components";
 import Select from "@material-ui/core/Select";
 import { colors } from "../../constants";
 
-//TODO Details page styling.
+type LineType = { width: string; height: string };
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,8 +18,8 @@ export const Row = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin: 0 0.5rem;
-  width: 85%;
-  height: 50%;
+  min-width: 90%;
+  background-color: pink;
 `;
 
 export const RowItem = styled.div`
@@ -37,9 +38,9 @@ export const CampaignControl = styled.div`
   padding: 1rem 0;
 `;
 
-export const StyledLine = styled.hr`
-  height: 1px;
-  width: 40%;
+export const StyledLine = styled.hr<LineType>`
+  height: ${(p) => p.width};
+  width: ${(p) => p.width};
   background-color: ${colors.lineColor};
 `;
 

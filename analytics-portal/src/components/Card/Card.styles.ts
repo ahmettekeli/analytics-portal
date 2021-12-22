@@ -22,9 +22,6 @@ export const Wrapper = styled.div`
         padding: 0 0.5rem;
         border-radius: 1rem;
     }
-    div{
-        padding: 0.5rem;
-    }
   }
 
   .card-detail {
@@ -46,6 +43,13 @@ export const Wrapper = styled.div`
   //below 600px width
 
   `;
+
+export const NameContainer = styled.div`
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+`;
+
 export const StyledLink = styled(Link)`
   text-decoration: none;
   &:focus,

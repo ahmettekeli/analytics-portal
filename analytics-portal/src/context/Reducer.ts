@@ -1,15 +1,26 @@
 import { actionTypes } from "./ActionTypes";
-import { AnalyticsStateInterface, ActionInterface } from "./Interfaces";
+import {
+  AppCampaignType,
+  AnalyticsStateInterface,
+  CampaignDataInterface,
+  ContextActionInterface,
+} from "./Interfaces";
 
 function Reducer(
   state: AnalyticsStateInterface,
-  action: ActionInterface
+  action: ContextActionInterface
 ): AnalyticsStateInterface {
   switch (action.type) {
     case actionTypes.GET_ANALYTICS_DATA:
+      return action.payload as AnalyticsStateInterface;
+    case actionTypes.ADD_CAMPAIGN:
       return {
         ...state,
-        analyticsData: action.payload,
+        //TODO campaign eklerken payload tipi ne olacak?
+        campaignData: [
+          ...state.campaignData,
+          action.payload as CampaignDataInterface,
+        ],
       };
     default:
       return state;

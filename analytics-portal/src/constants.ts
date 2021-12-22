@@ -35,7 +35,9 @@ export const colors: {
 };
 
 export const urls: {
-  apiUrl: string;
+  apiUrlApp: string;
+  apiUrlCampaign: string;
 } = {
-  apiUrl: "https://6183c1af91d76c00172d1b05.mockapi.io/app",
+  apiUrlApp: "https://6183c1af91d76c00172d1b05.mockapi.io/app",
+  apiUrlCampaign: "https://6183c1af91d76c00172d1b05.mockapi.io/campaign",
 };

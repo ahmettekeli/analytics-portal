@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { colors } from "../../constants";
-//TODO Header styling.
 
 export const StyledHeader = styled.div`
   display: flex;
@@ -8,7 +7,7 @@ export const StyledHeader = styled.div`
   justify-content: center;
   background-color: ${colors.headerBackground};
   color: ${colors.headerText};
-  margin: 2rem;
+  margin: 1rem;
   padding: 0 2rem;
   min-width: 90%;
   min-height: 10%;

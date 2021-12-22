@@ -8,20 +8,18 @@ import { getAvgInstalls, getAvgRevenue } from "../../utils/utilities";
 import { StyledLine } from "../../views/Details/Details.styles";
 
 function CardContainer() {
-  const { analyticsData, isLoading, errorMessage } = useAPI();
+  const {
+    state: { appData, isLoading, errorMessage },
+  } = useAPI();
   const [isAlertVisible, setisAlertVisible] = useState(false);
-  const [activeCampaigns, setActiveCampaigns] = useState<typeof analyticsData>(
-    []
-  );
-  const [inactiveCampaigns, setInactiveCampaigns] = useState<
-    typeof analyticsData
-  >([]);
+  const [activeApps, setActiveApps] = useState<typeof appData>([]);
+  const [inactiveApps, setInactiveApps] = useState<typeof appData>([]);
 
   function hideAlert() {
     setisAlertVisible(false);
   }
 
-  function populateCards(cardList: typeof analyticsData) {
+  function populateCards(cardList: typeof appData) {
     return cardList.map((item) => {
       //TODO find out what is campaign and the number above it.
       return (
@@ -45,15 +43,15 @@ function CardContainer() {
   useEffect(() => {
     if (!isLoading) {
       //dividing active and inactive campaigns into their own array.
-      analyticsData.forEach((item, index) => {
+      appData.forEach((item, index) => {
         if (item.active) {
-          setActiveCampaigns((prev) => [...prev, item]);
+          setActiveApps((prev) => [...prev, item]);
         } else {
-          setInactiveCampaigns((prev) => [...prev, item]);
+          setInactiveApps((prev) => [...prev, item]);
         }
       });
     }
-  }, [analyticsData, isLoading]);
+  }, [appData, isLoading]);
 
   return (
     <Wrapper>
@@ -61,9 +59,9 @@ function CardContainer() {
         <LinearProgress />
       ) : (
         <>
-          <Container>{populateCards(activeCampaigns)}</Container>
-          <StyledLine />
-          <Container>{populateCards(inactiveCampaigns)}</Container>
+          <Container>{populateCards(activeApps)}</Container>
+          <StyledLine width="80%" height="1px" />
+          <Container>{populateCards(inactiveApps)}</Container>
         </>
       )}
       <Snackbar

@@ -14,8 +14,18 @@ import {
   StyledSelect,
 } from "./Details.styles";
 import { useAPI } from "../../context/Store";
-import { formatDate, isNameValid } from "../../utils/utilities";
-import { AnalyticsDataInterface } from "../../context/Interfaces";
+import {
+  formatDate,
+  getAppChartData,
+  getCampaignChartData,
+  isNameValid,
+} from "../../utils/utilities";
+import {
+  AppDataInterface,
+  AppChartDataType,
+  CampaignChartDataType,
+  CampaignDataInterface,
+} from "../../context/Interfaces";
 import { StyledButton } from "../../components/Popup/Popup.styles";
 import LineChart from "../../components/LineChart/LineChart";
 import { colors } from "../../constants";
@@ -23,29 +33,25 @@ import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
 import { StyledMotionDiv } from "../Overview/Overview.styles";
 
 function Details() {
-  type ChartDataType = {
-    installLabels: string[];
-    installData: number[];
-    revenueLabels: string[];
-    revenueData: number[];
-  };
-
   const { name } = useParams();
-  const { analyticsData, isLoading, errorMessage } = useAPI();
-  const [activeCampaigns, setActiveCampaigns] = useState<
-    AnalyticsDataInterface[]
-  >([]);
+  console.log(name);
+  const {
+    state: { appData, campaignData, isLoading },
+  } = useAPI();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const [currentApp, setCurrentApp] = useState<AppDataInterface>();
+
   const [selectedCampaign, setSelectedCampaign] =
-    useState<AnalyticsDataInterface>();
+    useState<CampaignDataInterface>();
   const [selectedCampaignName, setSelectedCampaignName] = useState("");
-  const [currentCampaign, setCurrentCampaign] =
-    useState<AnalyticsDataInterface>();
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
 
-  const [chartData, setChartData] = useState<ChartDataType>();
+  const [appChartData, setAppChartData] = useState<AppChartDataType>();
+  const [campaignChartData, setCampaignChartData] =
+    useState<CampaignChartDataType>();
 
   function showPopup(): void {
     setIsPopupOpen(true);
@@ -65,29 +71,31 @@ function Details() {
       console.log("adding campaign");
       //TODO generate random data here.
       setIsPopupOpen(false);
-      showNotification();
       setNotificationMessage("Successfully Added Campaign.");
-
+      showNotification();
       return;
     }
     console.log("Name is not valid");
     //TODO show success message in snackbar here.
-    showNotification();
     setNotificationMessage("Please enter a valid Campaign name");
+    showNotification();
   }
 
   function onSelect(value: string) {
-    const tempCampaign = activeCampaigns.find(
+    const tempCampaign = campaignData.find(
       (campaign) => campaign.name === value
     );
     //TODO campaign baslangicta undefined, setCampaign yaptiktan sonra bile undefined kaliyor. aync ya da closure etkisi muhtemelen.
-    setSelectedCampaign(tempCampaign as AnalyticsDataInterface);
+    setSelectedCampaign(tempCampaign);
     setSelectedCampaignName(value);
     console.log("target val:", value);
     console.log("selected campaign", selectedCampaign);
+    setCampaignChartData(
+      getCampaignChartData(tempCampaign as CampaignDataInterface)
+    );
   }
 
-  function populateMenuItems(campaignList: AnalyticsDataInterface[]) {
+  function populateMenuItems(campaignList: CampaignDataInterface[]) {
     return campaignList.map((campaign) => {
       return (
         <MenuItem key={campaign.id} value={campaign.name}>
@@ -97,57 +105,44 @@ function Details() {
     });
   }
 
-  function getChartData(campaign: AnalyticsDataInterface): ChartDataType {
-    return {
-      installLabels: campaign.installs.map((item) => item.day),
-      installData: campaign.installs.map((item) => item.value),
-      revenueLabels: campaign.revenue.map((item) => item.day),
-      revenueData: campaign.revenue.map((item) => item.value),
-    };
-  }
-
   useEffect(() => {
     if (!isLoading) {
-      const tempActiveCampaigns = analyticsData.filter((item) => item.active);
-      const tempCurrentCampaign = analyticsData.find(
-        (campaign) => campaign.name === name
-      );
-      setActiveCampaigns(tempActiveCampaigns as AnalyticsDataInterface[]);
-      setCurrentCampaign(tempCurrentCampaign);
-      setChartData(getChartData(tempCurrentCampaign as AnalyticsDataInterface));
+      const tempCurrentApp = appData.find((app) => app.name === name);
+      setAppChartData(getAppChartData(tempCurrentApp as AppDataInterface));
+      setCurrentApp(tempCurrentApp);
     }
-  }, [isLoading, analyticsData, name]);
+  }, [isLoading, campaignData, name]);
   return (
     <StyledMotionDiv>
       <Wrapper>
         <OverviewProfile
-          imgUrl={currentCampaign?.icon}
-          name={currentCampaign?.name}
+          imgUrl={currentApp?.icon}
+          name={currentApp?.name}
           creationDate={
-            currentCampaign?.createdAt
-              ? formatDate(currentCampaign?.createdAt as Date)
+            currentApp?.createdAt
+              ? formatDate(currentApp?.createdAt as Date)
               : "..."
           }
         />
         <Row>
           <RowItem>
             <LineChart
-              labels={chartData?.installLabels}
-              data={chartData?.installData}
+              labels={appChartData?.installLabels}
+              data={appChartData?.installData}
               color={colors.lineChartColor}
               dataLabel="Installs"
             />
           </RowItem>
           <RowItem>
             <LineChart
-              labels={chartData?.revenueLabels}
-              data={chartData?.revenueData}
+              labels={appChartData?.revenueLabels}
+              data={appChartData?.revenueData}
               color={colors.lineChartColor}
               dataLabel="revenue"
             />
           </RowItem>
         </Row>
-        <StyledLine />
+        <StyledLine width="40%" height="1px" />
         <Row>
           <RowItem>
             <CampaignControl>
@@ -162,13 +157,20 @@ function Details() {
                     onSelect(e.target.value as string);
                   }}
                 >
-                  {populateMenuItems(activeCampaigns as typeof analyticsData)}
+                  {populateMenuItems(campaignData)}
                 </StyledSelect>
               </FormControl>
               <StyledButton onClick={showPopup}>New Campaign</StyledButton>
             </CampaignControl>
           </RowItem>
-          <RowItem>{/* TODO dynamic graph visibility.*/}</RowItem>
+          <RowItem>
+            <LineChart
+              labels={campaignChartData?.installLabels}
+              data={campaignChartData?.installData}
+              color={colors.lineChartColor}
+              dataLabel="Installs"
+            />
+          </RowItem>
         </Row>
         <Popup
           isOpen={isPopupOpen}
