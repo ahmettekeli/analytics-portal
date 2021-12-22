@@ -27,6 +27,7 @@ export interface AppDataInterface {
   id: string;
   installs: AppInstallInterface[];
   revenue: RevenueInterface[];
+  campaigns: CampaignDataInterface[];
 }
 
 export interface CampaignDataInterface {

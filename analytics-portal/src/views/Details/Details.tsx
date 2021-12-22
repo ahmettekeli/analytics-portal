@@ -111,7 +111,7 @@ function Details() {
       setAppChartData(getAppChartData(tempCurrentApp as AppDataInterface));
       setCurrentApp(tempCurrentApp);
     }
-  }, [isLoading, campaignData, name]);
+  }, [isLoading, campaignData, appData, name]);
   return (
     <StyledMotionDiv>
       <Wrapper>

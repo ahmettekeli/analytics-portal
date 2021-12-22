@@ -19,13 +19,11 @@ export const Row = styled.div`
   justify-content: space-around;
   margin: 0 0.5rem;
   min-width: 90%;
-  background-color: pink;
 `;
 
 export const RowItem = styled.div`
   width: 50%;
   margin: 1rem;
-  /* background-color: lightgray; */
 `;
 
 export const CampaignControl = styled.div`

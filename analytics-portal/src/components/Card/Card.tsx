@@ -1,4 +1,12 @@
-import { NameContainer, Wrapper, StyledLink } from "./Card.styles";
+import {
+  NameContainer,
+  NumberContainer,
+  Wrapper,
+  StyledLink,
+  CardDetailElement,
+  CardProfile,
+  CardDetail,
+} from "./Card.styles";
 import capitalize from "lodash/capitalize";
 
 function Card({
@@ -21,28 +29,28 @@ function Card({
   }
   return (
     <Wrapper>
-      <div className={getClassName(isActive, "card-profile")}>
+      <CardProfile isActive={isActive}>
         <StyledLink to={`/overview/${name}`}>
           <img src={imgUrl} alt={name} />
         </StyledLink>
         <StyledLink to={`/overview/${name}`}>
           <NameContainer>{capitalize(name)}</NameContainer>
         </StyledLink>
-      </div>
-      <div className={getClassName(isActive, "card-detail")}>
-        <div className="card-detail-element">
-          <strong>{campaignCount}</strong>
+      </CardProfile>
+      <CardDetail isActive={isActive}>
+        <CardDetailElement>
+          <NumberContainer>{campaignCount}</NumberContainer>
           <p>Campaigns</p>
-        </div>
-        <div className="card-detail-element">
-          <strong>{installs}</strong>
+        </CardDetailElement>
+        <CardDetailElement>
+          <NumberContainer>{installs}</NumberContainer>
           <p>Avg. Installs</p>
-        </div>
-        <div className="card-detail-element">
-          <strong>{revenue}</strong>
+        </CardDetailElement>
+        <CardDetailElement>
+          <NumberContainer>{revenue}</NumberContainer>
           <p>Avg. Revenue</p>
-        </div>
-      </div>
+        </CardDetailElement>
+      </CardDetail>
     </Wrapper>
   );
 }
