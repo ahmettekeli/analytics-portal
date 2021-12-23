@@ -14,18 +14,18 @@ export const ProfileItem = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
+`;
 
-  p {
-    color: ${colors.dateText};
-    font-size: 0.6rem;
-    font-weight: bold;
-    padding: 1rem 0;
-  }
+export const ProfileText = styled.p`
+  color: ${colors.dateText};
+  font-size: 0.6rem;
+  font-weight: bold;
+  padding: 1rem 0;
+`;
 
-  img {
-    width: 8rem;
-    height: 8rem;
-  }
+export const ProfileImg = styled.img`
+  width: 8rem;
+  height: 8rem;
 `;
 
 export const NameContainer = styled.div`

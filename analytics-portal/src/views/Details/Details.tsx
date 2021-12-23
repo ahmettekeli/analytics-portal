@@ -16,6 +16,7 @@ import {
 import { useAPI } from "../../context/Store";
 import {
   formatDate,
+  generateCampaign,
   getAppChartData,
   getCampaignChartData,
   isNameValid,
@@ -24,26 +25,27 @@ import {
   AppDataInterface,
   AppChartDataType,
   CampaignChartDataType,
-  CampaignDataInterface,
+  CampaignType,
 } from "../../context/Interfaces";
 import { StyledButton } from "../../components/Popup/Popup.styles";
 import LineChart from "../../components/LineChart/LineChart";
 import { colors } from "../../constants";
 import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
 import { StyledMotionDiv } from "../Overview/Overview.styles";
+import { actionTypes } from "../../context/ActionTypes";
 
 function Details() {
   const { name } = useParams();
-  console.log(name);
   const {
-    state: { appData, campaignData, isLoading },
+    state: { appData, currentApp, isLoading, errorMessage },
+    dispatch,
   } = useAPI();
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const [currentApp, setCurrentApp] = useState<AppDataInterface>();
+  // const [currentApp, setCurrentApp] = useState<AppDataInterface>();
 
-  const [selectedCampaign, setSelectedCampaign] =
-    useState<CampaignDataInterface>();
+  const [selectedCampaign, setSelectedCampaign] = useState<CampaignType>();
   const [selectedCampaignName, setSelectedCampaignName] = useState("");
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
@@ -66,52 +68,63 @@ function Details() {
   }
 
   function handleAddingCampaign(campaignName: string) {
-    //TODO validate campaignName.
     if (isNameValid(campaignName)) {
       console.log("adding campaign");
-      //TODO generate random data here.
+      let newCampaign: CampaignType = generateCampaign(campaignName);
+      newCampaign.appId = (currentApp as AppDataInterface).id;
+      // (currentApp as AppDataInterface).campaigns.push(newCampaign);
+      console.log({ currentApp });
+      dispatch({
+        type: actionTypes.ADD_CAMPAIGN,
+        payload: {
+          app: currentApp as AppDataInterface,
+          campaign: newCampaign as CampaignType,
+        },
+      });
+      console.log("appData", appData);
       setIsPopupOpen(false);
       setNotificationMessage("Successfully Added Campaign.");
       showNotification();
       return;
     }
-    console.log("Name is not valid");
-    //TODO show success message in snackbar here.
     setNotificationMessage("Please enter a valid Campaign name");
     showNotification();
   }
 
   function onSelect(value: string) {
-    const tempCampaign = campaignData.find(
+    const tempCampaign = currentApp?.campaigns.find(
       (campaign) => campaign.name === value
     );
-    //TODO campaign baslangicta undefined, setCampaign yaptiktan sonra bile undefined kaliyor. aync ya da closure etkisi muhtemelen.
     setSelectedCampaign(tempCampaign);
     setSelectedCampaignName(value);
     console.log("target val:", value);
     console.log("selected campaign", selectedCampaign);
-    setCampaignChartData(
-      getCampaignChartData(tempCampaign as CampaignDataInterface)
-    );
+    setCampaignChartData(getCampaignChartData(tempCampaign as CampaignType));
   }
 
-  function populateMenuItems(campaignList: CampaignDataInterface[]) {
-    return campaignList.map((campaign) => {
-      return (
-        <MenuItem key={campaign.id} value={campaign.name}>
-          {campaign.name}
-        </MenuItem>
-      );
-    });
+  function populateMenuItems(campaignList: CampaignType[]) {
+    if (campaignList) {
+      return campaignList.map((campaign) => {
+        return (
+          <MenuItem key={campaign.id} value={campaign.name}>
+            {campaign.name}
+          </MenuItem>
+        );
+      });
+    }
   }
 
   useEffect(() => {
     if (!isLoading) {
       const tempCurrentApp = appData.find((app) => app.name === name);
       setAppChartData(getAppChartData(tempCurrentApp as AppDataInterface));
-      setCurrentApp(tempCurrentApp);
+      // setCurrentApp(tempCurrentApp);
     }
-  }, [isLoading, campaignData, appData, name]);
+    if (errorMessage) {
+      setNotificationMessage(errorMessage);
+      showNotification();
+    }
+  }, [isLoading, appData, name, errorMessage]);
   return (
     <StyledMotionDiv>
       <Wrapper>
@@ -157,7 +170,7 @@ function Details() {
                     onSelect(e.target.value as string);
                   }}
                 >
-                  {populateMenuItems(campaignData)}
+                  {populateMenuItems(currentApp?.campaigns as CampaignType[])}
                 </StyledSelect>
               </FormControl>
               <StyledButton onClick={showPopup}>New Campaign</StyledButton>

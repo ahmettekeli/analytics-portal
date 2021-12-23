@@ -1,9 +1,20 @@
+import { v4 as uuidv4 } from "uuid";
 import {
   AppDataInterface,
   AppChartDataType,
   CampaignChartDataType,
-  CampaignDataInterface,
+  CampaignType,
 } from "../context/Interfaces";
+
+const dummyCampaignData = [
+  { day: "Day 1" },
+  { day: "Day 2" },
+  { day: "Day 3" },
+  { day: "Day 4" },
+  { day: "Day 5" },
+  { day: "Day 6" },
+  { day: "Day 7" },
+];
 
 export function isNameValid(name: string): boolean {
   return name.length > 0;
@@ -26,21 +37,26 @@ export function formatDate(date: Date): string {
   return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
 }
 
-export function generateCampaign() {
-  let campaign = {
-    createdAt: new Date(),
-    name: "",
-    icon: "",
-    active: true,
-    id: "",
-    installs: [],
-    revenue: [],
+function getRandomValue(min: number, max: number): number {
+  return Math.trunc(Math.random() * (max - min) + min);
+}
+
+export function generateCampaign(name: string): CampaignType {
+  let installs = dummyCampaignData.map((item) => {
+    return {
+      day: item.day,
+      value: getRandomValue(0, 200),
+    };
+  });
+
+  return {
+    name,
+    id: uuidv4(),
+    installs,
   };
-  return campaign;
 }
 
 export function getAppChartData(app: AppDataInterface): AppChartDataType {
-  console.log({ app });
   return {
     installLabels: app.installs.map((item) => item.day),
     installData: app.installs.map((item) => item.value),
@@ -50,7 +66,7 @@ export function getAppChartData(app: AppDataInterface): AppChartDataType {
 }
 
 export function getCampaignChartData(
-  campaign: CampaignDataInterface
+  campaign: CampaignType
 ): CampaignChartDataType {
   return {
     installLabels: campaign.installs.map((item) => item.day),

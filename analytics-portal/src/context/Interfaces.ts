@@ -27,31 +27,53 @@ export interface AppDataInterface {
   id: string;
   installs: AppInstallInterface[];
   revenue: RevenueInterface[];
-  campaigns: CampaignDataInterface[];
+  campaigns: CampaignType[];
 }
 
-export interface CampaignDataInterface {
+export type CampaignType = {
   name: string;
   installs: CampaignInstallInterface[];
-  id: number;
-}
+  id: string;
+  appId?: string;
+};
 
 export interface AnalyticsStateInterface {
   appData: AppDataInterface[];
-  campaignData: CampaignDataInterface[];
+  currentApp: AppDataInterface;
   isLoading: boolean;
   errorMessage: string | null;
 }
 
+export type AnalyticsStateType =
+  | {
+      appData: AppDataInterface[];
+      currentApp: AppDataInterface;
+      isLoading: boolean;
+      errorMessage: string;
+    }
+  | {
+      appData: AppDataInterface[];
+      currentApp: null | AppDataInterface;
+      isLoading: boolean;
+      errorMessage: null;
+    };
+
 export type AppCampaignType = {
-  appData: AppDataInterface[];
-  campaignData: CampaignDataInterface[];
+  app: AppDataInterface;
+  campaign: CampaignType;
 };
 
-export interface ContextActionInterface {
-  type: actionTypes;
-  payload: CampaignDataInterface | AppDataInterface | AppCampaignType;
-}
+export type ContextActionType =
+  // | { type: actionTypes.GET_ANALYTICS_DATA; payload: AnalyticsStateInterface }
+  | { type: actionTypes.GET_ANALYTICS_DATA; payload: AnalyticsStateType }
+  | {
+      type: actionTypes.ADD_CAMPAIGN;
+      payload: AppCampaignType;
+    }
+  | {
+      type: actionTypes.SET_CURRENT_APP;
+      payload: AppDataInterface;
+    };
 
 export type AppChartDataType = {
   installLabels: string[];

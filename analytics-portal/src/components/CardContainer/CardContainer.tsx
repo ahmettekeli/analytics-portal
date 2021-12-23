@@ -27,10 +27,11 @@ function CardContainer() {
           key={item.id}
           imgUrl={item.icon}
           name={item.name}
-          campaignCount={0}
+          campaignCount={item.campaigns.length}
           installs={getAvgInstalls(item, cardList.length)}
           revenue={getAvgRevenue(item, cardList.length)}
           isActive={item.active}
+          app={item}
         ></Card>
       );
     });

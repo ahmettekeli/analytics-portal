@@ -11,9 +11,6 @@ export const Wrapper = styled.div`
   margin: 1rem 0;
   border-radius: 0.5rem;
   width: 100%;
-
-  //TODO add media query for mobile.
-  //below 600px width
 `;
 export const CardProfile = styled.div<PropType>`
 
@@ -22,13 +19,12 @@ export const CardProfile = styled.div<PropType>`
     align-items: center;
     margin 0.5rem;
     opacity: ${(props) => (props.isActive ? 1 : 0.5)};
+`;
 
-
-    img{
-        height: 60px;
-        padding: 0 0.5rem;
-        border-radius: 1rem;
-    }
+export const CardProfileImg = styled.img`
+  height: 60px;
+  padding: 0 0.5rem;
+  border-radius: 1rem;
 `;
 
 export const CardDetail = styled.div<PropType>`
@@ -65,3 +61,6 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `;
+
+//TODO add media query for mobile.
+//below 600px width
