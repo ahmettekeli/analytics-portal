@@ -37,13 +37,6 @@ export type CampaignType = {
   appId?: string;
 };
 
-export interface AnalyticsStateInterface {
-  appData: AppDataInterface[];
-  currentApp: AppDataInterface;
-  isLoading: boolean;
-  errorMessage: string | null;
-}
-
 export type AnalyticsStateType =
   | {
       appData: AppDataInterface[];
@@ -53,7 +46,7 @@ export type AnalyticsStateType =
     }
   | {
       appData: AppDataInterface[];
-      currentApp: null | AppDataInterface;
+      currentApp: AppDataInterface | undefined;
       isLoading: boolean;
       errorMessage: null;
     };
@@ -64,7 +57,6 @@ export type AppCampaignType = {
 };
 
 export type ContextActionType =
-  // | { type: actionTypes.GET_ANALYTICS_DATA; payload: AnalyticsStateInterface }
   | { type: actionTypes.GET_ANALYTICS_DATA; payload: AnalyticsStateType }
   | {
       type: actionTypes.ADD_CAMPAIGN;

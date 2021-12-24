@@ -36,7 +36,6 @@ function Card({
   return (
     <Wrapper>
       <CardProfile isActive={isActive}>
-        {/* <StyledLink to={`/overview/${name}`}> */}
         <StyledLink
           to={`/overview/${name}`}
           onClick={() => {

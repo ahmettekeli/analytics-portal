@@ -4,6 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from "@material-ui/core/Snackbar";
+import Select from "@material-ui/core/Select";
 import Popup from "../../components/Popup/Popup";
 import {
   CampaignControl,
@@ -11,7 +12,6 @@ import {
   RowItem,
   Wrapper,
   StyledLine,
-  StyledSelect,
 } from "./Details.styles";
 import { useAPI } from "../../context/Store";
 import {
@@ -42,10 +42,6 @@ function Details() {
   } = useAPI();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  // const [currentApp, setCurrentApp] = useState<AppDataInterface>();
-
-  const [selectedCampaign, setSelectedCampaign] = useState<CampaignType>();
   const [selectedCampaignName, setSelectedCampaignName] = useState("");
 
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
@@ -72,7 +68,6 @@ function Details() {
       console.log("adding campaign");
       let newCampaign: CampaignType = generateCampaign(campaignName);
       newCampaign.appId = (currentApp as AppDataInterface).id;
-      // (currentApp as AppDataInterface).campaigns.push(newCampaign);
       console.log({ currentApp });
       dispatch({
         type: actionTypes.ADD_CAMPAIGN,
@@ -95,14 +90,14 @@ function Details() {
     const tempCampaign = currentApp?.campaigns.find(
       (campaign) => campaign.name === value
     );
-    setSelectedCampaign(tempCampaign);
     setSelectedCampaignName(value);
     console.log("target val:", value);
-    console.log("selected campaign", selectedCampaign);
     setCampaignChartData(getCampaignChartData(tempCampaign as CampaignType));
   }
 
   function populateMenuItems(campaignList: CampaignType[]) {
+    //TODO prevent unnecessary rerenders here and on add campaign button click.
+    console.log("populating menu items with:", campaignList);
     if (campaignList) {
       return campaignList.map((campaign) => {
         return (
@@ -118,7 +113,6 @@ function Details() {
     if (!isLoading) {
       const tempCurrentApp = appData.find((app) => app.name === name);
       setAppChartData(getAppChartData(tempCurrentApp as AppDataInterface));
-      // setCurrentApp(tempCurrentApp);
     }
     if (errorMessage) {
       setNotificationMessage(errorMessage);
@@ -161,7 +155,7 @@ function Details() {
             <CampaignControl>
               <FormControl fullWidth>
                 <InputLabel id="campaign-select-label">Campaigns</InputLabel>
-                <StyledSelect
+                <Select
                   labelId="campaign-select-label"
                   id="campaign-select"
                   value={selectedCampaignName}
@@ -171,9 +165,11 @@ function Details() {
                   }}
                 >
                   {populateMenuItems(currentApp?.campaigns as CampaignType[])}
-                </StyledSelect>
+                </Select>
               </FormControl>
-              <StyledButton onClick={showPopup}>New Campaign</StyledButton>
+              <StyledButton onClick={showPopup} disabled={!currentApp?.active}>
+                New Campaign
+              </StyledButton>
             </CampaignControl>
           </RowItem>
           <RowItem>

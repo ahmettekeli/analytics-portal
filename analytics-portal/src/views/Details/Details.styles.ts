@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Select from "@material-ui/core/Select";
 import { colors } from "../../constants";
 
 type LineType = { width: string; height: string };
@@ -41,5 +40,3 @@ export const StyledLine = styled.hr<LineType>`
   width: ${(p) => p.width};
   background-color: ${colors.lineColor};
 `;
-
-export const StyledSelect = styled(Select)``;

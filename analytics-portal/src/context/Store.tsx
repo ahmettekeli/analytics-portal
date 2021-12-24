@@ -10,22 +10,19 @@ import { actionTypes } from "./ActionTypes";
 import {
   AppDataInterface,
   ContextActionType,
-  AnalyticsStateInterface,
   AnalyticsStateType,
   CampaignType,
 } from "./Interfaces";
 import { urls } from "../constants"; //TODO fix process.env.REACT_APP_API_URL
 
-// const initialState: AnalyticsStateInterface = {
 const initialState: AnalyticsStateType = {
   appData: [],
-  currentApp: null,
+  currentApp: undefined,
   isLoading: true,
   errorMessage: null,
 };
 
 export const Context = createContext<{
-  // state: AnalyticsStateInterface;
   state: AnalyticsStateType;
   dispatch: React.Dispatch<ContextActionType>;
 }>({
@@ -54,11 +51,6 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
     Promise.all([fetch(urls.apiUrlApp), fetch(urls.apiUrlCampaign)])
       .then((values) => {
         Promise.all([values[0].json(), values[1].json()]).then((values) => {
-          console.log("campaigns", values[1]);
-          //TODO values[1] icinde don ve hepsine appid ekle, default lara -1 ver,
-          //custom ekleyeceklerine hangi app e aitse o app in id sini ver.
-          //TODO custom eklenenleri localstorage dan cekebilirsin.
-
           //Since there is no appId in the given campaigns, we will add it to all of them.There should be a value to connect a campaign to an app.
           //It's usually an id.
           //We'll add appId to the campaigns that will be added later by the client.
@@ -79,7 +71,7 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
               };
             }),
             isLoading: false,
-            currentApp: null,
+            currentApp: undefined,
             errorMessage: null,
           };
           //set appData to localStorage

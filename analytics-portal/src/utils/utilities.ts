@@ -37,7 +37,7 @@ export function formatDate(date: Date): string {
   return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
 }
 
-function getRandomValue(min: number, max: number): number {
+export function getRandomValue(min: number, max: number): number {
   return Math.trunc(Math.random() * (max - min) + min);
 }
 

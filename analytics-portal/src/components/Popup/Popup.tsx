@@ -14,7 +14,6 @@ function Popup({
 }: {
   isOpen: boolean;
   hide: () => void;
-  //TODO add its parameter to the function signature.
   onAdd: (campaignName: string) => void;
 }) {
   const [campaignName, setCampaignName] = useState("");
@@ -32,6 +31,7 @@ function Popup({
           <StyledButton
             onClick={() => {
               onAdd(campaignName);
+              setCampaignName("");
             }}
           >
             Add
