@@ -1,16 +1,11 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { StyledApp } from "./App.styles";
-import Home from "../../views/Home/Home";
-import Overview from "../../views/Overview/Overview";
+import AnalyticsProvider from "../../context/Store";
 import Details from "../../views/Details/Details";
 import Header from "../Header/Header";
-import AnalyticsProvider from "../../context/Store";
+import Home from "../../views/Home/Home";
+import NotFound404 from "../../views/NotFound404/NotFound404";
+import Overview from "../../views/Overview/Overview";
 import { routes } from "../../constants";
 
 function App() {
@@ -19,14 +14,13 @@ function App() {
       <StyledApp>
         <Header />
         <AnalyticsProvider>
-          <AnimatePresence exitBeforeEnter>
-            <Routes>
-              <Route path={routes.home} element={<Home />} />
-              <Route path={routes.overview} element={<Overview />} />
-              <Route path={routes.details} element={<Details />} />
-              <Route path="*" element={<Navigate to="/404" />} />
-            </Routes>
-          </AnimatePresence>
+          <Routes>
+            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.overview} element={<Overview />} />
+            <Route path={routes.details} element={<Details />} />
+            <Route path={routes.notFound} element={<NotFound404 />} />
+            <Route element={<NotFound404 />} />
+          </Routes>
         </AnalyticsProvider>
       </StyledApp>
     </Router>

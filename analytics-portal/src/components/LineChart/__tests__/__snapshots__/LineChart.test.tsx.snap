@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LineChart LineChart matches snapshot 1`] = `
+<div
+  data-testid="LineChart"
+>
+  <canvas
+    height={200}
+    role="img"
+    width={200}
+  />
+</div>
+`;

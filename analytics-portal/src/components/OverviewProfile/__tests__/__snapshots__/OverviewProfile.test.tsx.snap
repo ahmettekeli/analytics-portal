@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverviewProfile OverviewProfile matches snapshot 1`] = `
+<div
+  className="sc-bdvvtL hmVePv"
+  data-testid="OverviewProfile"
+>
+  <div
+    className="sc-gsDKAQ kpcoSg"
+  >
+    <img
+      alt="Test"
+      className="sc-hKwDye eprGRg"
+      src="http://placeimg.com/640/480/abstract"
+    />
+  </div>
+  <div
+    className="sc-gsDKAQ kpcoSg"
+  >
+    <div
+      className="sc-eCImPb hRZqSQ"
+    >
+      Test
+    </div>
+    <p
+      className="sc-dkPtRN iMrBjb"
+    >
+      Created at undefined.undefined.Wed Nov 03 2021 15:33:53 GM
+    </p>
+  </div>
+</div>
+`;

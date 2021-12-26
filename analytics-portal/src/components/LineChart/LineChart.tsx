@@ -32,7 +32,7 @@ function LineChart({
     LineElement
   );
   return (
-    <div>
+    <div data-testid="LineChart">
       <Line
         data={{
           labels,

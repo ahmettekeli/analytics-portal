@@ -9,7 +9,7 @@ function Breadcrumbs() {
 
   const pathnames = location.pathname.split("/").filter((x) => x);
   return (
-    <StyledBreadcrumbs aria-label="breadcrumb">
+    <StyledBreadcrumbs aria-label="breadcrumb" data-testid="Breadcrumbs">
       <StyledLink to="/">Home</StyledLink>
       {pathnames.map((value, index) => {
         value = capitalize(value);

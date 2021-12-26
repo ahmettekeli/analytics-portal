@@ -17,7 +17,7 @@ function OverviewProfile({
   creationDate: string;
 }) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="OverviewProfile">
       <ProfileItem>
         <ProfileImg src={imgUrl} alt={name} />
       </ProfileItem>

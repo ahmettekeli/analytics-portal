@@ -4,13 +4,13 @@ import Card from "../Card/Card";
 import { Container, Wrapper } from "./CardContainer.styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import { getAvgInstalls, getAvgRevenue } from "../../utils/utilities";
 import { StyledLine } from "../../views/Details/Details.styles";
 
 function CardContainer() {
   const {
     state: { appData, isLoading, errorMessage },
   } = useAPI();
+
   const [isAlertVisible, setisAlertVisible] = useState(false);
   const [activeApps, setActiveApps] = useState<typeof appData>([]);
   const [inactiveApps, setInactiveApps] = useState<typeof appData>([]);
@@ -21,19 +21,7 @@ function CardContainer() {
 
   function populateCards(cardList: typeof appData) {
     return cardList.map((item) => {
-      //TODO find out what is campaign and the number above it.
-      return (
-        <Card
-          key={item.id}
-          imgUrl={item.icon}
-          name={item.name}
-          campaignCount={item.campaigns.length}
-          installs={getAvgInstalls(item, cardList.length)}
-          revenue={getAvgRevenue(item, cardList.length)}
-          isActive={item.active}
-          app={item}
-        ></Card>
-      );
+      return <Card key={item.id} app={item}></Card>;
     });
   }
 

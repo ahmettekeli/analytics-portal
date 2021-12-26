@@ -18,7 +18,7 @@ function Popup({
 }) {
   const [campaignName, setCampaignName] = useState("");
   return (
-    <Wrapper>
+    <Wrapper data-testid="Popup">
       <Dialog onClose={hide} open={isOpen}>
         <InputContainer>
           <StyledInput

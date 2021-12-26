@@ -9,40 +9,29 @@ import {
   StyledLink,
 } from "./Card.styles";
 import capitalize from "lodash/capitalize";
-import { useAPI } from "../../context/Store";
 import { actionTypes } from "../../context/ActionTypes";
 import { AppDataInterface } from "../../context/Interfaces";
+import { getAvgInstalls, getAvgRevenue } from "../../utils/utilities";
+import { useAPI } from "../../context/Store";
 
-function Card({
-  app,
-  imgUrl,
-  name,
-  campaignCount,
-  installs,
-  revenue,
-  isActive,
-}: {
-  app: AppDataInterface;
-  imgUrl: string;
-  name: string;
-  campaignCount: number;
-  installs: number;
-  revenue: number;
-  isActive: boolean;
-}) {
+function Card({ app }: { app: AppDataInterface }) {
   const { dispatch } = useAPI();
+  const { active, campaigns, icon, name } = app;
+  const avgRevenue = getAvgRevenue(app, campaigns.length);
+  const avgInstalls = getAvgInstalls(app, campaigns.length);
+
   //TODO currentApp doesn't get set in the global store if you enter a url /overview/:name
   //find a way to dispatch with react router
   return (
-    <Wrapper>
-      <CardProfile isActive={isActive}>
+    <Wrapper data-testid="Card">
+      <CardProfile isActive={active}>
         <StyledLink
           to={`/overview/${name}`}
           onClick={() => {
             dispatch({ type: actionTypes.SET_CURRENT_APP, payload: app });
           }}
         >
-          <CardProfileImg src={imgUrl} alt={name} />
+          <CardProfileImg src={icon} alt={name} />
         </StyledLink>
         <StyledLink
           to={`/overview/${name}`}
@@ -53,17 +42,17 @@ function Card({
           <NameContainer>{capitalize(name)}</NameContainer>
         </StyledLink>
       </CardProfile>
-      <CardDetail isActive={isActive}>
+      <CardDetail isActive={active}>
         <CardDetailElement>
-          <NumberContainer>{campaignCount}</NumberContainer>
+          <NumberContainer>{campaigns.length}</NumberContainer>
           <p>Campaigns</p>
         </CardDetailElement>
         <CardDetailElement>
-          <NumberContainer>{installs}</NumberContainer>
+          <NumberContainer>{avgInstalls}</NumberContainer>
           <p>Avg. Installs</p>
         </CardDetailElement>
         <CardDetailElement>
-          <NumberContainer>{revenue}</NumberContainer>
+          <NumberContainer>{avgRevenue}</NumberContainer>
           <p>Avg. Revenue</p>
         </CardDetailElement>
       </CardDetail>

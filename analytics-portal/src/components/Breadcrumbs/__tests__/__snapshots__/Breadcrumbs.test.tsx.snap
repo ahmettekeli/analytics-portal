@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs Breadcrumbs matches snapshot 1`] = `
+<nav
+  aria-label="breadcrumb"
+  className="MuiTypography-root MuiBreadcrumbs-root sc-furwcr hHiJWN MuiTypography-body1 MuiTypography-colorTextSecondary"
+  data-testid="Breadcrumbs"
+>
+  <ol
+    className="MuiBreadcrumbs-ol"
+  >
+    <li
+      className="MuiBreadcrumbs-li"
+    >
+      <a
+        className="sc-iCfMLu iMJIiJ"
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+    </li>
+    <li
+      aria-hidden={true}
+      className="MuiBreadcrumbs-separator"
+    >
+      /
+    </li>
+    <li
+      className="MuiBreadcrumbs-li"
+    >
+      <a
+        className="sc-iCfMLu iMJIiJ"
+        href="/home"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+    </li>
+    <li
+      aria-hidden={true}
+      className="MuiBreadcrumbs-separator"
+    >
+      /
+    </li>
+    <li
+      className="MuiBreadcrumbs-li"
+    >
+      <a
+        className="sc-iCfMLu iMJIiJ"
+        href="/home/overview"
+        onClick={[Function]}
+      >
+        Overview
+      </a>
+    </li>
+    <li
+      aria-hidden={true}
+      className="MuiBreadcrumbs-separator"
+    >
+      /
+    </li>
+    <li
+      className="MuiBreadcrumbs-li"
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+      >
+        Test
+      </p>
+    </li>
+  </ol>
+</nav>
+`;
