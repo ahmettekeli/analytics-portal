@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import { colors } from "../../constants";
+import { colors } from "../../configs";
 
 export const StyledBreadcrumbs = styled(Breadcrumbs)`
   && {

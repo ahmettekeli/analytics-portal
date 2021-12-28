@@ -1,15 +1,3 @@
-export const routes: {
-  home: string;
-  overview: string;
-  details: string;
-  notFound: string;
-} = {
-  home: "/",
-  overview: "/overview",
-  details: "overview/:name",
-  notFound: "/404",
-};
-
 export const colors: {
   cardBackground: string;
   cardText: string;
@@ -34,12 +22,4 @@ export const colors: {
   lineColor: "#EAEAEA",
   lineChartColor: "#7D7D7D",
   dateText: "#999999",
-};
-
-export const urls: {
-  apiUrlApp: string;
-  apiUrlCampaign: string;
-} = {
-  apiUrlApp: "https://6183c1af91d76c00172d1b05.mockapi.io/app",
-  apiUrlCampaign: "https://6183c1af91d76c00172d1b05.mockapi.io/campaign",
 };

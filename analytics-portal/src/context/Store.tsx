@@ -13,7 +13,6 @@ import {
   AnalyticsStateType,
   CampaignType,
 } from "./Interfaces";
-import { urls } from "../constants"; //TODO fix process.env.REACT_APP_API_URL
 
 const initialState: AnalyticsStateType = {
   appData: [],
@@ -38,7 +37,10 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
     //TODO 2 fetch yapmana gerek yok. onclick aninda campaign leri fetch et.
     //fetch yerine useSWR kullanabilirsin.
     //burayi custom hook yapabilirim. helper olabilir.
-    Promise.all([fetch(urls.apiUrlApp), fetch(urls.apiUrlCampaign)])
+    Promise.all([
+      fetch(process.env.REACT_APP_APP_ENDPOINT as string),
+      fetch(process.env.REACT_APP_CAMPAIGN_ENDPOINT as string),
+    ])
       //await promiseAll kullanilabilir 2. promise all icin.
       .then((values) => {
         Promise.all([values[0].json(), values[1].json()]).then((values) => {
@@ -47,14 +49,13 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
           //We'll add appId to the campaigns that will be added later by the client.
           //Each campaign will have an appId that's corresponding to its app.
 
-          //TODO Letleri const a cevir
-          let campaigns: CampaignType[] = values[1].map(
+          const campaigns: CampaignType[] = values[1].map(
             (campaign: CampaignType) => {
               campaign["appId"] = "-1";
               return campaign;
             }
           );
-          let payload: AnalyticsStateType = {
+          const payload: AnalyticsStateType = {
             //adding all campaigns to each app as I was explained in the response e-mail i got for my questions.
             appData: values[0].map((app: AppDataInterface) => {
               return {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
+import { colors } from "../../configs";
 import { StyledButton } from "../../components/Popup/Popup.styles";
 
 type LineType = { width: string };

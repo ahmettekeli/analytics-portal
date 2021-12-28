@@ -7,7 +7,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Select from "@material-ui/core/Select";
 import Popup from "../../components/Popup/Popup";
 import { actionTypes } from "../../context/ActionTypes";
-import { colors } from "../../constants";
+import { colors } from "../../configs";
 import LineChart from "../../components/LineChart/LineChart";
 import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
 import { StyledButton } from "../../components/Popup/Popup.styles";
@@ -45,7 +45,7 @@ function Details() {
 
   const isCampaignPathValid = useCallback(() => {
     return utils.isCampaignPathValid(pathnames, currentApp?.name as string);
-  }, [pathnames, currentApp?.name]);
+  }, []);
 
   const navigateTo404 = useCallback(() => {
     navigate("/404", { replace: true });
