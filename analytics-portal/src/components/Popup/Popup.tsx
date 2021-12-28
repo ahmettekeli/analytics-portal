@@ -1,11 +1,6 @@
 import { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
-import {
-  InputContainer,
-  Wrapper,
-  StyledButton,
-  StyledInput,
-} from "./Popup.styles";
+import * as S from "./Popup.styles";
 
 function Popup({
   isOpen,
@@ -18,27 +13,27 @@ function Popup({
 }) {
   const [campaignName, setCampaignName] = useState("");
   return (
-    <Wrapper data-testid="Popup">
+    <S.Wrapper data-testid="Popup">
       <Dialog onClose={hide} open={isOpen}>
-        <InputContainer>
-          <StyledInput
+        <S.InputContainer>
+          <S.StyledInput
             variant="outlined"
             label="Campaign Name"
             id="campaign-name-input"
             value={campaignName}
             onChange={(e) => setCampaignName(e.target.value)}
-          ></StyledInput>
-          <StyledButton
+          ></S.StyledInput>
+          <S.StyledButton
             onClick={() => {
               onAdd(campaignName);
               setCampaignName("");
             }}
           >
             Add
-          </StyledButton>
-        </InputContainer>
+          </S.StyledButton>
+        </S.InputContainer>
       </Dialog>
-    </Wrapper>
+    </S.Wrapper>
   );
 }
 

@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { colors } from "../../configs";
+import { colors } from "configs";
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: left;
   margin: 1rem;
   padding: 0.5rem;
-  min-width: 100%;
+  min-width: 95%;
   min-height: 10%;
 `;
 

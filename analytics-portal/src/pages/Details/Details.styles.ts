@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../configs";
-import { StyledButton } from "../../components/Popup/Popup.styles";
+import { colors } from "configs";
+import { StyledButton } from "components/Popup/Popup.styles";
 
 type LineType = { width: string };
 
@@ -24,16 +24,6 @@ export const Row = styled.div`
 export const RowItem = styled.div`
   width: 50%;
   margin: 1rem;
-`;
-
-export const CampaignControl = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  margin: 1rem auto;
-  padding: 1rem 0;
 `;
 
 export const StyledLine = styled.hr<LineType>`

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import { StyledLink } from "../Card/Card.styles";
 import { colors } from "../../configs";
 
 export const StyledBreadcrumbs = styled(Breadcrumbs)`
@@ -9,3 +10,5 @@ export const StyledBreadcrumbs = styled(Breadcrumbs)`
     color: ${colors.cardText};
   }
 `;
+
+export { StyledLink };

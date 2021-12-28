@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
-import { useAPI } from "../../context/Store";
-import * as S from "./CardContainer.styles";
+import { useAPI } from "context/Store";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import CardList from "../CardList/CardList";
+import * as S from "./CardContainer.styles";
+import useNotification from "useNotification";
 
 function CardContainer() {
   const {
     state: { appData, isLoading, errorMessage },
   } = useAPI();
 
-  const [isAlertVisible, setisAlertVisible] = useState(false);
+  const {
+    visible: alertVisibility,
+    hideNotification,
+    showNotification,
+  } = useNotification();
   const [activeApps, setActiveApps] = useState<typeof appData>([]);
   const [inactiveApps, setInactiveApps] = useState<typeof appData>([]);
 
-  function hideAlert() {
-    setisAlertVisible(false);
-  }
-
   useEffect(() => {
-    setisAlertVisible(errorMessage ? true : false);
+    errorMessage && showNotification();
   }, [errorMessage]);
 
   useEffect(() => {
@@ -45,9 +46,9 @@ function CardContainer() {
       <S.StyledLine width="80%" data-testid="AppSeperationLine" />
       <CardList type="Inactive" apps={inactiveApps}></CardList>
       <Snackbar
-        open={isAlertVisible}
+        open={alertVisibility}
         autoHideDuration={6000}
-        onClose={hideAlert}
+        onClose={hideNotification}
         message={errorMessage}
       />
     </S.Wrapper>

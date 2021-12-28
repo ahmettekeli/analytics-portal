@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import { StyledLine } from "pages/Details/Details.styles";
+import { StyledButton } from "components/Popup/Popup.styles";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 100%;
+  width: 50%;
+  margin: 1rem auto;
+  padding: 1rem 0;
 `;
 
-export { StyledLine };
+export { StyledButton };

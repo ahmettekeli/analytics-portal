@@ -1,25 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from "@material-ui/core/Snackbar";
-import Select from "@material-ui/core/Select";
-import Popup from "../../components/Popup/Popup";
-import { actionTypes } from "../../context/ActionTypes";
-import { colors } from "../../configs";
-import LineChart from "../../components/LineChart/LineChart";
-import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
-import { StyledButton } from "../../components/Popup/Popup.styles";
+import { actionTypes } from "context/ActionTypes";
+import { useAPI } from "context/Store";
+import { colors } from "configs";
+import CampaignControl from "components/CampaignControl/CampaignControl";
+import Popup from "components/Popup/Popup";
+import LineChart from "components/LineChart/LineChart";
+import OverviewProfile from "components/OverviewProfile/OverviewProfile";
 import * as S from "./Details.styles";
-import { useAPI } from "../../context/Store";
-import * as utils from "../../utils/utilities";
+import * as utils from "utils/utilities";
 import {
   AppDataInterface,
   AppChartDataType,
   CampaignChartDataType,
   CampaignType,
-} from "../../context/Interfaces";
+} from "context/Interfaces";
+import usePopup from "usePopup";
+import useNotification from "useNotification";
 
 function Details() {
   const { name } = useParams();
@@ -32,11 +30,14 @@ function Details() {
   const navigate = useNavigate();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedCampaignName, setSelectedCampaignName] = useState("");
+  const { visible: popupVisibility, hidePopup, showPopup } = usePopup();
 
-  // const [showNotification, hideNotification] = useNotification(false);
-  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const {
+    showNotification,
+    hideNotification,
+    visible: notificationVisibility,
+  } = useNotification();
+
   const [notificationMessage, setNotificationMessage] = useState("");
 
   const [appChartData, setAppChartData] = useState<AppChartDataType>();
@@ -45,26 +46,11 @@ function Details() {
 
   const isCampaignPathValid = useCallback(() => {
     return utils.isCampaignPathValid(pathnames, currentApp?.name as string);
-  }, []);
+  }, [currentApp]);
 
   const navigateTo404 = useCallback(() => {
     navigate("/404", { replace: true });
   }, [navigate]);
-  // utils.isCampaignPathValid(pathnames, currentApp?.name as string)
-
-  //TODO useNotification, usePopup custom hooklari olusturulabilir.
-
-  function showPopup(): void {
-    setIsPopupOpen(true);
-  }
-
-  function hideNotification() {
-    setIsNotificationVisible(false);
-  }
-
-  function showNotification() {
-    setIsNotificationVisible(true);
-  }
 
   //TODO - refactor this
   function handleAddingCampaign(campaignName: string) {
@@ -73,8 +59,7 @@ function Details() {
       showNotification();
       return;
     }
-    console.log("adding campaign");
-    let newCampaign: CampaignType = utils.generateCampaign(campaignName);
+    const newCampaign: CampaignType = utils.generateCampaign(campaignName);
     newCampaign.appId = (currentApp as AppDataInterface).id;
     console.log({ currentApp });
     dispatch({
@@ -84,35 +69,19 @@ function Details() {
         campaign: newCampaign as CampaignType,
       },
     });
-    console.log("appData", appData);
-    setIsPopupOpen(false);
+    hidePopup();
     setNotificationMessage("Successfully Added Campaign.");
     showNotification();
   }
 
   function onSelect(value: string) {
+    //Finding related campaign and getting chart data for it.
     const tempCampaign = currentApp?.campaigns.find(
       (campaign) => campaign.name === value
     );
-    setSelectedCampaignName(value);
-    console.log("target val:", value);
     setCampaignChartData(
       utils.getCampaignChartData(tempCampaign as CampaignType)
     );
-  }
-
-  function populateMenuItems(campaignList: CampaignType[]) {
-    //TODO prevent unnecessary rerenders here and on add campaign button click.
-    console.log("populating menu items with:", campaignList);
-    if (campaignList) {
-      return campaignList.map((campaign) => {
-        return (
-          <MenuItem key={campaign.id} value={campaign.name}>
-            {campaign.name}
-          </MenuItem>
-        );
-      });
-    }
   }
 
   useEffect(() => {
@@ -176,25 +145,14 @@ function Details() {
       <S.StyledLine width="40%" />
       <S.Row>
         <S.RowItem>
-          <S.CampaignControl>
-            <FormControl fullWidth>
-              <InputLabel id="campaign-select-label">Campaigns</InputLabel>
-              <Select
-                labelId="campaign-select-label"
-                id="campaign-select"
-                value={selectedCampaignName}
-                label="Campaign"
-                onChange={(e) => {
-                  onSelect(e.target.value as string);
-                }}
-              >
-                {populateMenuItems(currentApp?.campaigns as CampaignType[])}
-              </Select>
-            </FormControl>
-            <StyledButton onClick={showPopup} disabled={!currentApp?.active}>
-              New Campaign
-            </StyledButton>
-          </S.CampaignControl>
+          <CampaignControl
+            campaignList={currentApp?.campaigns}
+            onSelect={(value: string) => {
+              onSelect(value);
+            }}
+            onNewCampaign={showPopup}
+            disabled={!currentApp?.active}
+          />
         </S.RowItem>
         <S.RowItem>
           <LineChart
@@ -206,14 +164,14 @@ function Details() {
         </S.RowItem>
       </S.Row>
       <Popup
-        isOpen={isPopupOpen}
+        isOpen={popupVisibility}
         hide={() => {
-          setIsPopupOpen(false);
+          hidePopup();
         }}
         onAdd={handleAddingCampaign}
       ></Popup>
       <Snackbar
-        open={isNotificationVisible}
+        open={notificationVisibility}
         autoHideDuration={4000}
         onClose={hideNotification}
         message={notificationMessage}

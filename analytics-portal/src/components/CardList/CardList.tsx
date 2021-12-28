@@ -1,5 +1,5 @@
 import * as S from "./CardList.styles";
-import { AppDataInterface } from "../../context/Interfaces";
+import { AppDataInterface } from "context/Interfaces";
 import Card from "../Card/Card";
 
 function CardList({ type, apps }: { type: string; apps: AppDataInterface[] }) {

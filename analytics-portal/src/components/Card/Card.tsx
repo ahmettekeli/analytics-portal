@@ -1,10 +1,10 @@
-import * as S from "./Card.styles";
-import { actionTypes } from "../../context/ActionTypes";
-import { AppDataInterface } from "../../context/Interfaces";
+import { actionTypes } from "context/ActionTypes";
+import { AppDataInterface } from "context/Interfaces";
 import CardProfile from "../CardProfile/CardProfile";
-import { getAvgInstalls, getAvgRevenue } from "../../utils/utilities";
-import { useAPI } from "../../context/Store";
 import CardDetail from "../CardDetail/CardDetail";
+import { getAvgInstalls, getAvgRevenue } from "utils/utilities";
+import { useAPI } from "context/Store";
+import * as S from "./Card.styles";
 
 function Card({ app }: { app: AppDataInterface }) {
   const { dispatch } = useAPI();

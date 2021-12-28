@@ -1,5 +1,5 @@
 import { StyledMotionDiv } from "./Overview.styles";
-import CardContainer from "../../components/CardContainer/CardContainer";
+import CardContainer from "components/CardContainer/CardContainer";
 
 function Overview() {
   return (
