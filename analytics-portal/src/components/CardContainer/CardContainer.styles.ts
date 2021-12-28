@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledLine } from "../../pages/Details/Details.styles";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,7 +9,4 @@ export const Wrapper = styled.div`
   min-width: 100%;
 `;
 
-export const Container = styled.div`
-  width: 100%;
-  margin: 0.5rem;
-`;
+export { StyledLine };

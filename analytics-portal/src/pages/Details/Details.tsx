@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,21 +11,9 @@ import { colors } from "../../constants";
 import LineChart from "../../components/LineChart/LineChart";
 import OverviewProfile from "../../components/OverviewProfile/OverviewProfile";
 import { StyledButton } from "../../components/Popup/Popup.styles";
-import {
-  CampaignControl,
-  Row,
-  RowItem,
-  Wrapper,
-  StyledLine,
-} from "./Details.styles";
+import * as S from "./Details.styles";
 import { useAPI } from "../../context/Store";
-import {
-  formatDate,
-  generateCampaign,
-  getAppChartData,
-  getCampaignChartData,
-  isNameValid,
-} from "../../utils/utilities";
+import * as utils from "../../utils/utilities";
 import {
   AppDataInterface,
   AppChartDataType,
@@ -47,12 +35,24 @@ function Details() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedCampaignName, setSelectedCampaignName] = useState("");
 
+  // const [showNotification, hideNotification] = useNotification(false);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
 
   const [appChartData, setAppChartData] = useState<AppChartDataType>();
   const [campaignChartData, setCampaignChartData] =
     useState<CampaignChartDataType>();
+
+  const isCampaignPathValid = useCallback(() => {
+    return utils.isCampaignPathValid(pathnames, currentApp?.name as string);
+  }, [pathnames, currentApp?.name]);
+
+  const navigateTo404 = useCallback(() => {
+    navigate("/404", { replace: true });
+  }, [navigate]);
+  // utils.isCampaignPathValid(pathnames, currentApp?.name as string)
+
+  //TODO useNotification, usePopup custom hooklari olusturulabilir.
 
   function showPopup(): void {
     setIsPopupOpen(true);
@@ -66,26 +66,27 @@ function Details() {
     setIsNotificationVisible(true);
   }
 
+  //TODO - refactor this
   function handleAddingCampaign(campaignName: string) {
-    if (isNameValid(campaignName)) {
-      console.log("adding campaign");
-      let newCampaign: CampaignType = generateCampaign(campaignName);
-      newCampaign.appId = (currentApp as AppDataInterface).id;
-      console.log({ currentApp });
-      dispatch({
-        type: actionTypes.ADD_CAMPAIGN,
-        payload: {
-          app: currentApp as AppDataInterface,
-          campaign: newCampaign as CampaignType,
-        },
-      });
-      console.log("appData", appData);
-      setIsPopupOpen(false);
-      setNotificationMessage("Successfully Added Campaign.");
+    if (!utils.isNameValid(campaignName)) {
+      setNotificationMessage("Please enter a valid Campaign name");
       showNotification();
       return;
     }
-    setNotificationMessage("Please enter a valid Campaign name");
+    console.log("adding campaign");
+    let newCampaign: CampaignType = utils.generateCampaign(campaignName);
+    newCampaign.appId = (currentApp as AppDataInterface).id;
+    console.log({ currentApp });
+    dispatch({
+      type: actionTypes.ADD_CAMPAIGN,
+      payload: {
+        app: currentApp as AppDataInterface,
+        campaign: newCampaign as CampaignType,
+      },
+    });
+    console.log("appData", appData);
+    setIsPopupOpen(false);
+    setNotificationMessage("Successfully Added Campaign.");
     showNotification();
   }
 
@@ -95,7 +96,9 @@ function Details() {
     );
     setSelectedCampaignName(value);
     console.log("target val:", value);
-    setCampaignChartData(getCampaignChartData(tempCampaign as CampaignType));
+    setCampaignChartData(
+      utils.getCampaignChartData(tempCampaign as CampaignType)
+    );
   }
 
   function populateMenuItems(campaignList: CampaignType[]) {
@@ -112,20 +115,13 @@ function Details() {
     }
   }
 
-  function isCampaignPathValid(): boolean {
-    //TODO url ile gelinirse currentApp bos oldugundan 404 sayfasina yonlendiriliyor. !!
-    const campaignPath = pathnames[pathnames.length - 1];
-    if (campaignPath === currentApp?.name) {
-      return true;
-    }
-    return false;
-  }
-
   useEffect(() => {
     if (isCampaignPathValid()) {
       if (!isLoading) {
         const tempCurrentApp = appData.find((app) => app.name === name);
-        setAppChartData(getAppChartData(tempCurrentApp as AppDataInterface));
+        setAppChartData(
+          utils.getAppChartData(tempCurrentApp as AppDataInterface)
+        );
       }
       if (errorMessage) {
         setNotificationMessage(errorMessage);
@@ -133,42 +129,54 @@ function Details() {
       }
     } else {
       console.log("navigating to 404");
-      navigate("/404", { replace: true });
+      navigateTo404();
     }
-  }, [isLoading, appData, name, errorMessage]);
+  }, [
+    isLoading,
+    appData,
+    name,
+    errorMessage,
+    isCampaignPathValid,
+    navigateTo404,
+  ]);
+
+  if (!currentApp) {
+    return null;
+  }
+
   return (
-    <Wrapper>
+    <S.Wrapper>
       <OverviewProfile
         imgUrl={currentApp?.icon}
         name={currentApp?.name}
         creationDate={
           currentApp?.createdAt
-            ? formatDate(currentApp?.createdAt as Date)
+            ? utils.formatDate(currentApp?.createdAt as Date)
             : "..."
         }
       />
-      <Row>
-        <RowItem>
+      <S.Row>
+        <S.RowItem>
           <LineChart
             labels={appChartData?.installLabels}
             data={appChartData?.installData}
             color={colors.lineChartColor}
             dataLabel="Installs"
           />
-        </RowItem>
-        <RowItem>
+        </S.RowItem>
+        <S.RowItem>
           <LineChart
             labels={appChartData?.revenueLabels}
             data={appChartData?.revenueData}
             color={colors.lineChartColor}
             dataLabel="revenue"
           />
-        </RowItem>
-      </Row>
-      <StyledLine width="40%" height="1px" />
-      <Row>
-        <RowItem>
-          <CampaignControl>
+        </S.RowItem>
+      </S.Row>
+      <S.StyledLine width="40%" />
+      <S.Row>
+        <S.RowItem>
+          <S.CampaignControl>
             <FormControl fullWidth>
               <InputLabel id="campaign-select-label">Campaigns</InputLabel>
               <Select
@@ -186,17 +194,17 @@ function Details() {
             <StyledButton onClick={showPopup} disabled={!currentApp?.active}>
               New Campaign
             </StyledButton>
-          </CampaignControl>
-        </RowItem>
-        <RowItem>
+          </S.CampaignControl>
+        </S.RowItem>
+        <S.RowItem>
           <LineChart
             labels={campaignChartData?.installLabels}
             data={campaignChartData?.installData}
             color={colors.lineChartColor}
             dataLabel="Installs"
           />
-        </RowItem>
-      </Row>
+        </S.RowItem>
+      </S.Row>
       <Popup
         isOpen={isPopupOpen}
         hide={() => {
@@ -210,7 +218,7 @@ function Details() {
         onClose={hideNotification}
         message={notificationMessage}
       />
-    </Wrapper>
+    </S.Wrapper>
   );
 }
 

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Overview Overview matches snapshot 1`] = `
+<div
+  className="sc-bdvvtL eILeqO"
+  data-testid="Overview"
+  style={Object {}}
+>
+  <div
+    className="sc-dJjYzT kJDsuI"
+    data-testid="CardContainer"
+  >
+    <div
+      className="MuiLinearProgress-root MuiLinearProgress-colorPrimary MuiLinearProgress-indeterminate"
+      role="progressbar"
+    >
+      <div
+        className="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate"
+        style={Object {}}
+      />
+      <div
+        className="MuiLinearProgress-bar MuiLinearProgress-bar2Indeterminate MuiLinearProgress-barColorPrimary"
+        style={Object {}}
+      />
+    </div>
+  </div>
+</div>
+`;

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { colors } from "../../constants";
+import { StyledButton } from "../../components/Popup/Popup.styles";
 
-type LineType = { width: string; height: string };
+type LineType = { width: string };
 
 export const Wrapper = styled.div`
   display: flex;
@@ -36,7 +37,9 @@ export const CampaignControl = styled.div`
 `;
 
 export const StyledLine = styled.hr<LineType>`
-  height: ${(p) => p.width};
+  height: 1px;
   width: ${(p) => p.width};
   background-color: ${colors.lineColor};
 `;
+
+export { StyledButton };

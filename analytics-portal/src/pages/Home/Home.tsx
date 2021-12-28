@@ -9,6 +9,7 @@ function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      data-testid="Home"
     >
       <h3>Home page</h3>
       <Button

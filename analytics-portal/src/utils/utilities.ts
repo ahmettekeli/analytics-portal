@@ -73,3 +73,15 @@ export function getCampaignChartData(
     installData: campaign.installs.map((item) => item.value),
   };
 }
+
+export function isCampaignPathValid(
+  pathnames: string[],
+  appName: string
+): boolean {
+  //TODO url ile gelinirse currentApp bos oldugundan 404 sayfasina yonlendiriliyor. !!
+  const campaignPath = pathnames[pathnames.length - 1];
+  if (campaignPath === appName) {
+    return true;
+  }
+  return false;
+}

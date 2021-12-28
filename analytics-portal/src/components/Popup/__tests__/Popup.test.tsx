@@ -17,7 +17,7 @@ describe("Popop", () => {
   });
 
   //TODO: fix test
-  //   test("Popop matches snapshot", () => {
+  //   test("Popup matches snapshot", () => {
   //     const tree = renderer
   //       .create(<Popop isOpen={isOpen} hide={hide} onAdd={onAdd} />)
   //       .toJSON();

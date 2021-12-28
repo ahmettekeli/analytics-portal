@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAPI } from "../../context/Store";
-import Card from "../Card/Card";
-import { Container, Wrapper } from "./CardContainer.styles";
+import * as S from "./CardContainer.styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import { StyledLine } from "../../views/Details/Details.styles";
+import CardList from "../CardList/CardList";
 
 function CardContainer() {
   const {
@@ -19,12 +18,6 @@ function CardContainer() {
     setisAlertVisible(false);
   }
 
-  function populateCards(cardList: typeof appData) {
-    return cardList.map((item) => {
-      return <Card key={item.id} app={item}></Card>;
-    });
-  }
-
   useEffect(() => {
     setisAlertVisible(errorMessage ? true : false);
   }, [errorMessage]);
@@ -32,7 +25,7 @@ function CardContainer() {
   useEffect(() => {
     if (!isLoading) {
       //dividing active and inactive campaigns into their own array.
-      appData.forEach((item, index) => {
+      appData.forEach((item) => {
         if (item.active) {
           setActiveApps((prev) => [...prev, item]);
         } else {
@@ -42,24 +35,22 @@ function CardContainer() {
     }
   }, [appData, isLoading]);
 
+  if (isLoading) {
+    return <LinearProgress />;
+  }
+
   return (
-    <Wrapper>
-      {isLoading ? (
-        <LinearProgress />
-      ) : (
-        <>
-          <Container>{populateCards(activeApps)}</Container>
-          <StyledLine width="80%" height="1px" />
-          <Container>{populateCards(inactiveApps)}</Container>
-        </>
-      )}
+    <S.Wrapper data-testid="CardContainer">
+      <CardList type="Active" apps={activeApps}></CardList>
+      <S.StyledLine width="80%" data-testid="AppSeperationLine" />
+      <CardList type="Inactive" apps={inactiveApps}></CardList>
       <Snackbar
         open={isAlertVisible}
         autoHideDuration={6000}
         onClose={hideAlert}
         message={errorMessage}
       />
-    </Wrapper>
+    </S.Wrapper>
   );
 }
 

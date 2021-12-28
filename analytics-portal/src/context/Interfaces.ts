@@ -1,5 +1,16 @@
 import { actionTypes } from "./ActionTypes";
 
+//base interface olusturup app ve campaign icin onlardan turetilebilir.
+//2 dosya olsun, app.interface.ts ve campaign.interface.ts
+//app.types.ts ve campaign.types.ts olabilir.
+
+//Install interface {
+//   day:
+//   value:
+//   id?:
+//   appId?:
+// }
+
 export interface AppInstallInterface {
   day: string;
   value: number;

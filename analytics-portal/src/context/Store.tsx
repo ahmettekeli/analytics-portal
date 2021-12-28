@@ -33,28 +33,21 @@ export const Context = createContext<{
 function AnalyticsProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
+  //TODO useEffect depencdency array e state i eklemeyigoz ardi et.
   useEffect(() => {
-    // if (!localStorage.getItem("stateData")) {
-    //   // get app data from local storage
-    //   const data = JSON.parse(localStorage.getItem("stateData") as string);
-    //   console.log("local storage stateData:", data);
-    //   dispatch({
-    //     type: actionTypes.GET_ANALYTICS_DATA,
-    //     payload: {
-    //       appData: data.appData,
-    //       isLoading: false,
-    //       currentApp: null,
-    //       errorMessage: null,
-    //     },
-    //   });
-    // } else {
+    //TODO 2 fetch yapmana gerek yok. onclick aninda campaign leri fetch et.
+    //fetch yerine useSWR kullanabilirsin.
+    //burayi custom hook yapabilirim. helper olabilir.
     Promise.all([fetch(urls.apiUrlApp), fetch(urls.apiUrlCampaign)])
+      //await promiseAll kullanilabilir 2. promise all icin.
       .then((values) => {
         Promise.all([values[0].json(), values[1].json()]).then((values) => {
           //Since there is no appId in the given campaigns, we will add it to all of them.There should be a value to connect a campaign to an app.
           //It's usually an id.
           //We'll add appId to the campaigns that will be added later by the client.
           //Each campaign will have an appId that's corresponding to its app.
+
+          //TODO Letleri const a cevir
           let campaigns: CampaignType[] = values[1].map(
             (campaign: CampaignType) => {
               campaign["appId"] = "-1";
@@ -66,7 +59,6 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
             appData: values[0].map((app: AppDataInterface) => {
               return {
                 ...app,
-                // campaigns: values[1],
                 campaigns,
               };
             }),
@@ -74,9 +66,6 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
             currentApp: undefined,
             errorMessage: null,
           };
-          //set appData to localStorage
-          // localStorage.setItem("stateData", JSON.stringify(payload));
-          //set appData to state
           dispatch({
             type: actionTypes.GET_ANALYTICS_DATA,
             payload,
@@ -93,7 +82,6 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
           } as AnalyticsStateType,
         });
       });
-    // }
   }, []);
 
   return (
@@ -110,3 +98,10 @@ export function useAPI() {
   }
   return context;
 }
+
+//TODO global state currentApp i hangi anda atamaliyim? router ile birlikte kullanilmali bir sekilde //
+//     useLocation ile pathnamelerden app name i ayni olan app i yakala, useEffect ile render aninda currentApp e ata. //
+//TODO sayfa yenilendiginde butun data ucuyor, store useEffect inde api call yapip datayi topluyorum.
+//     global state'i local storage'a atsam, her campaign eklemesinde dispatch sonrasinda localstorage'i guncellemem gerekecek.
+//     Bu OK bir durum mu? belki cache kullanilabilir. useSWR cache mekanizmasina bak.
+//TODO interfaces dosyasina duzenlemen gerek. Component icinde as ile typecasting yapiyorum. ozellikte currentApp icin.
