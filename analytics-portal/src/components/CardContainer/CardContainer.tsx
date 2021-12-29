@@ -37,14 +37,14 @@ function CardContainer() {
   }, [appData, isLoading]);
 
   if (isLoading) {
-    return <LinearProgress />;
+    return <LinearProgress data-testid="loading-bar" />;
   }
 
   return (
-    <S.Wrapper data-testid="CardContainer">
-      <CardList type="Active" apps={activeApps}></CardList>
-      <S.StyledLine width="80%" data-testid="AppSeperationLine" />
-      <CardList type="Inactive" apps={inactiveApps}></CardList>
+    <S.Wrapper data-testid="card-container">
+      <CardList type="active" apps={activeApps}></CardList>
+      <S.StyledLine width="80%" data-testid="app-seperation-line" />
+      <CardList type="inactive" apps={inactiveApps}></CardList>
       <Snackbar
         open={alertVisibility}
         autoHideDuration={6000}

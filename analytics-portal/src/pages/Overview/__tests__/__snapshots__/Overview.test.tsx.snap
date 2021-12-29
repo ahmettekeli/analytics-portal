@@ -3,26 +3,26 @@
 exports[`Overview Overview matches snapshot 1`] = `
 <div
   className="sc-bdvvtL eILeqO"
-  data-testid="Overview"
-  style={Object {}}
+  data-testid="overview"
+  style={
+    Object {
+      "opacity": 0,
+    }
+  }
 >
   <div
-    className="sc-dJjYzT kJDsuI"
-    data-testid="CardContainer"
+    className="MuiLinearProgress-root MuiLinearProgress-colorPrimary MuiLinearProgress-indeterminate"
+    data-testid="loading-bar"
+    role="progressbar"
   >
     <div
-      className="MuiLinearProgress-root MuiLinearProgress-colorPrimary MuiLinearProgress-indeterminate"
-      role="progressbar"
-    >
-      <div
-        className="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate"
-        style={Object {}}
-      />
-      <div
-        className="MuiLinearProgress-bar MuiLinearProgress-bar2Indeterminate MuiLinearProgress-barColorPrimary"
-        style={Object {}}
-      />
-    </div>
+      className="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate"
+      style={Object {}}
+    />
+    <div
+      className="MuiLinearProgress-bar MuiLinearProgress-bar2Indeterminate MuiLinearProgress-barColorPrimary"
+      style={Object {}}
+    />
   </div>
 </div>
 `;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardProfile CardProfile matches snapshot 1`] = `
+<div
+  className="sc-bdvvtL kFYleh"
+  data-testid="card-profile"
+>
+  <img
+    alt="Test app"
+    className="sc-gsDKAQ bioFnW"
+    src="http://placeimg.com/640/480/abstract"
+  />
+  <div
+    className="sc-dkPtRN cTqKzg"
+  >
+    Test app
+  </div>
+</div>
+`;

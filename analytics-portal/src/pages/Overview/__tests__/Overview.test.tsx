@@ -8,11 +8,7 @@ describe("Overview", () => {
     renderResult = render(<Overview />);
   });
   test("Renders Overview component", () => {
-    expect(renderResult.getByTestId("Overview")).toBeInTheDocument();
-  });
-
-  test("Renders CardContainer component", () => {
-    expect(renderResult.getByTestId("CardContainer")).toBeInTheDocument();
+    expect(renderResult.getByTestId("overview")).toBeInTheDocument();
   });
 
   test("Overview matches snapshot", () => {

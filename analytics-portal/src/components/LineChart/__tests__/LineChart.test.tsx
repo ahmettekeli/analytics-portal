@@ -1,7 +1,7 @@
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import LineChart from "../LineChart";
-import { colors } from "../../../constants";
+import { colors } from "configs/colors.config";
 
 describe("LineChart", () => {
   const testLabels = ["day 1", "day 2", "day 3", "day 4", "day 5"];
@@ -19,6 +19,8 @@ describe("LineChart", () => {
       />
     );
   });
+
+  afterEach(cleanup);
 
   test("Renders LineChart component", () => {
     expect(renderResult.getByTestId("LineChart")).toBeInTheDocument();

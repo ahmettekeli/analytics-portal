@@ -1,24 +1,24 @@
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import Breadcrumbs from "../Breadcrumbs";
 import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
 
 describe("Breadcrumbs", () => {
-  test("Renders Breadcrumbs component", () => {
-    const renderResult = render(
+  let renderResult: ReturnType<typeof render>;
+  beforeEach(() => {
+    renderResult = render(
       <Router>
         <Breadcrumbs />
       </Router>
     );
-    expect(renderResult.getByTestId("Breadcrumbs")).toBeInTheDocument();
+  });
+  afterEach(cleanup);
+
+  test("Renders Breadcrumbs component", () => {
+    expect(renderResult.getByTestId("breadcrumbs")).toBeInTheDocument();
   });
 
   test("Breadcrumbs to show home only", () => {
-    const renderResult = render(
-      <MemoryRouter initialEntries={["/"]}>
-        <Breadcrumbs />
-      </MemoryRouter>
-    );
     expect(renderResult.getByText("Home")).toBeInTheDocument();
   });
 

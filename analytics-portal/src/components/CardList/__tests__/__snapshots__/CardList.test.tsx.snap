@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardList CardList matches snapshot 1`] = `
+<div
+  className="sc-furwcr heWZUf"
+  data-testid="active-apps"
+>
+  <div
+    className="sc-gKclnd dgwTBo"
+    data-testid="card"
+    onClick={[Function]}
+  >
+    <a
+      className="sc-iCfMLu gchppI"
+      href="/overview/App1"
+      onClick={[Function]}
+    >
+      <div
+        className="sc-bdvvtL kFYleh"
+        data-testid="card-profile"
+      >
+        <img
+          alt="App1"
+          className="sc-gsDKAQ bioFnW"
+          src="http://placeimg.com/640/480/abstract"
+        />
+        <div
+          className="sc-dkPtRN cTqKzg"
+        >
+          App1
+        </div>
+      </div>
+      <div
+        className="sc-hKwDye frYTJy"
+        data-testid="card-detail"
+      >
+        <div
+          className="sc-eCImPb chOnSp"
+        >
+          <p
+            className="sc-jRQBWg hQmpLw"
+          >
+            1
+          </p>
+          <p>
+            Campaigns
+          </p>
+        </div>
+        <div
+          className="sc-eCImPb chOnSp"
+        >
+          <p
+            className="sc-jRQBWg hQmpLw"
+          >
+            115
+          </p>
+          <p>
+            Avg. Installs
+          </p>
+        </div>
+        <div
+          className="sc-eCImPb chOnSp"
+        >
+          <p
+            className="sc-jRQBWg hQmpLw"
+          >
+            61
+          </p>
+          <p>
+            Avg. Revenue
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;

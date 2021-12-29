@@ -2,7 +2,7 @@
 
 exports[`OverviewProfile OverviewProfile matches snapshot 1`] = `
 <div
-  className="sc-bdvvtL hmVePv"
+  className="sc-bdvvtL dfeucS"
   data-testid="OverviewProfile"
 >
   <div

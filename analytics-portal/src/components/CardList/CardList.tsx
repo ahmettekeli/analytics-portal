@@ -4,7 +4,7 @@ import * as S from "./CardList.styles";
 
 function CardList({ type, apps }: { type: string; apps: AppDataInterface[] }) {
   return (
-    <S.Wrapper data-testid={`${type}Apps`}>
+    <S.Wrapper data-testid={`${type}-apps`}>
       {apps.map((item) => {
         return <Card key={item.id} app={item}></Card>;
       })}

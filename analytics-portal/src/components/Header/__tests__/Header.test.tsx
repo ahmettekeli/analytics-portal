@@ -1,9 +1,11 @@
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import Header from "../Header";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Header", () => {
+  afterEach(cleanup);
+
   test("Renders Header component", () => {
     const renderResult = render(
       <Router>

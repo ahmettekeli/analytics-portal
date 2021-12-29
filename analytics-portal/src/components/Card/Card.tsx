@@ -14,7 +14,7 @@ function Card({ app }: { app: AppDataInterface }) {
 
   return (
     <S.Wrapper
-      data-testid="Card"
+      data-testid="card"
       onClick={() => {
         dispatch({ type: actionTypes.SET_CURRENT_APP, payload: app });
       }}

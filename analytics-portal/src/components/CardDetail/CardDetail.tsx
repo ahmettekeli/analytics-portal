@@ -12,7 +12,7 @@ function CardDetail({
   avgRevenue: number;
 }) {
   return (
-    <S.Wrapper isActive={isActive}>
+    <S.Wrapper isActive={isActive} data-testid="card-detail">
       <S.DetailElement>
         <S.NumberContainer>{campaignCount}</S.NumberContainer>
         <p>Campaigns</p>

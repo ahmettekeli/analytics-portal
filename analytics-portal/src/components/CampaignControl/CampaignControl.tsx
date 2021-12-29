@@ -32,7 +32,7 @@ function CampaignControl({
   }
 
   return (
-    <S.Wrapper>
+    <S.Wrapper data-testid="campaign-control">
       <FormControl fullWidth>
         <InputLabel id="campaign-select-label">Campaigns</InputLabel>
         <Select

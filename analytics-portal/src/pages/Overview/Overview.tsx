@@ -4,11 +4,12 @@ import CardContainer from "components/CardContainer/CardContainer";
 function Overview() {
   return (
     <StyledMotionDiv
+      data-testid="overview"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <CardContainer data-testid="Overview" />
+      <CardContainer />
     </StyledMotionDiv>
   );
 }

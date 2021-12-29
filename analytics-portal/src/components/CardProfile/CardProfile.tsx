@@ -11,7 +11,7 @@ function CardProfile({
   name: string;
 }) {
   return (
-    <S.Wrapper isActive={isActive}>
+    <S.Wrapper isActive={isActive} data-testid="card-profile">
       <S.ProfileImg src={src} alt={name} />
       <S.NameContainer>{capitalize(name)}</S.NameContainer>
     </S.Wrapper>

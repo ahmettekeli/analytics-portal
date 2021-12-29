@@ -3,8 +3,8 @@
 exports[`Breadcrumbs Breadcrumbs matches snapshot 1`] = `
 <nav
   aria-label="breadcrumb"
-  className="MuiTypography-root MuiBreadcrumbs-root sc-furwcr hHiJWN MuiTypography-body1 MuiTypography-colorTextSecondary"
-  data-testid="Breadcrumbs"
+  className="MuiTypography-root MuiBreadcrumbs-root sc-dkPtRN jAhehB MuiTypography-body1 MuiTypography-colorTextSecondary"
+  data-testid="breadcrumbs"
 >
   <ol
     className="MuiBreadcrumbs-ol"
@@ -13,7 +13,7 @@ exports[`Breadcrumbs Breadcrumbs matches snapshot 1`] = `
       className="MuiBreadcrumbs-li"
     >
       <a
-        className="sc-iCfMLu iMJIiJ"
+        className="sc-gsDKAQ WUnHj"
         href="/"
         onClick={[Function]}
       >
@@ -30,7 +30,7 @@ exports[`Breadcrumbs Breadcrumbs matches snapshot 1`] = `
       className="MuiBreadcrumbs-li"
     >
       <a
-        className="sc-iCfMLu iMJIiJ"
+        className="sc-gsDKAQ WUnHj"
         href="/home"
         onClick={[Function]}
       >
@@ -47,7 +47,7 @@ exports[`Breadcrumbs Breadcrumbs matches snapshot 1`] = `
       className="MuiBreadcrumbs-li"
     >
       <a
-        className="sc-iCfMLu iMJIiJ"
+        className="sc-gsDKAQ WUnHj"
         href="/home/overview"
         onClick={[Function]}
       >

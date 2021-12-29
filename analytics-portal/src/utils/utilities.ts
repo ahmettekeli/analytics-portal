@@ -30,8 +30,16 @@ export function getAvgInstalls(item: AppDataInterface, length: number): number {
 }
 
 export function formatDate(date: Date): string {
-  let dateArr = date.toString().split("T")[0].split("-");
-  return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
+  const tempDate = new Date(date);
+  const month = (tempDate.getMonth() + 1)
+    .toString()
+    .replace(/(^|\D)(\d)(?!\d)/g, "$10$2");
+  const day = tempDate
+    .getDate()
+    .toString()
+    .replace(/(^|\D)(\d)(?!\d)/g, "$10$2");
+  const year = tempDate.getFullYear();
+  return `${day}.${month}.${year}`;
 }
 
 export function getRandomValue(min: number, max: number): number {

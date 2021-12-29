@@ -1,8 +1,9 @@
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import OverviewProfile from "../OverviewProfile";
 import { BrowserRouter as Router } from "react-router-dom";
-import { formatDate } from "../../../utils/utilities";
+import { formatDate } from "utils/utilities";
+import { after } from "lodash";
 
 describe("OverviewProfile", () => {
   const imgUrl = "http://placeimg.com/640/480/abstract";
@@ -21,6 +22,8 @@ describe("OverviewProfile", () => {
       </Router>
     );
   });
+
+  afterEach(cleanup);
 
   test("Renders OverviewProfile component", () => {
     expect(renderResult.getByTestId("OverviewProfile")).toBeInTheDocument();
