@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "configs";
 import { StyledButton } from "components/Popup/Popup.styles";
+import { StyledMotionDiv } from "pages/Overview/Overview.styles";
 
 type LineType = { width: string };
 
@@ -32,4 +33,4 @@ export const StyledLine = styled.hr<LineType>`
   background-color: ${colors.lineColor};
 `;
 
-export { StyledButton };
+export { StyledButton, StyledMotionDiv };

@@ -109,69 +109,75 @@ function Details() {
   }
 
   return (
-    <S.Wrapper>
-      <OverviewProfile
-        imgUrl={currentApp?.icon}
-        name={currentApp?.name}
-        creationDate={
-          currentApp?.createdAt
-            ? utils.formatDate(currentApp?.createdAt as Date)
-            : "..."
-        }
-      />
-      <S.Row>
-        <S.RowItem>
-          <LineChart
-            labels={appChartData?.installLabels}
-            data={appChartData?.installData}
-            color={colors.lineChartColor}
-            dataLabel="Installs"
-          />
-        </S.RowItem>
-        <S.RowItem>
-          <LineChart
-            labels={appChartData?.revenueLabels}
-            data={appChartData?.revenueData}
-            color={colors.lineChartColor}
-            dataLabel="revenue"
-          />
-        </S.RowItem>
-      </S.Row>
-      <S.StyledLine width="40%" />
-      <S.Row>
-        <S.RowItem>
-          <CampaignControl
-            campaignList={currentApp?.campaigns}
-            onSelect={(value: string) => {
-              onSelect(value);
-            }}
-            onNewCampaign={showPopup}
-            disabled={!currentApp?.active}
-          />
-        </S.RowItem>
-        <S.RowItem>
-          <LineChart
-            labels={campaignChartData?.installLabels}
-            data={campaignChartData?.installData}
-            color={colors.lineChartColor}
-            dataLabel="Installs"
-          />
-        </S.RowItem>
-      </S.Row>
-      <Popup
-        isOpen={popupVisibility}
-        hide={() => {
-          hidePopup();
-        }}
-        onAdd={handleAddingCampaign}
-      ></Popup>
-      <Snackbar
-        open={notificationVisibility}
-        autoHideDuration={4000}
-        onClose={hideNotification}
-        message={notificationMessage}
-      />
-    </S.Wrapper>
+    <S.StyledMotionDiv
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <S.Wrapper>
+        <OverviewProfile
+          imgUrl={currentApp?.icon}
+          name={currentApp?.name}
+          creationDate={
+            currentApp?.createdAt
+              ? utils.formatDate(currentApp?.createdAt as Date)
+              : "..."
+          }
+        />
+        <S.Row>
+          <S.RowItem>
+            <LineChart
+              labels={appChartData?.installLabels}
+              data={appChartData?.installData}
+              color={colors.lineChartColor}
+              dataLabel="Installs"
+            />
+          </S.RowItem>
+          <S.RowItem>
+            <LineChart
+              labels={appChartData?.revenueLabels}
+              data={appChartData?.revenueData}
+              color={colors.lineChartColor}
+              dataLabel="revenue"
+            />
+          </S.RowItem>
+        </S.Row>
+        <S.StyledLine width="40%" />
+        <S.Row>
+          <S.RowItem>
+            <CampaignControl
+              campaignList={currentApp?.campaigns}
+              onSelect={(value: string) => {
+                onSelect(value);
+              }}
+              onNewCampaign={showPopup}
+              disabled={!currentApp?.active}
+            />
+          </S.RowItem>
+          <S.RowItem>
+            <LineChart
+              labels={campaignChartData?.installLabels}
+              data={campaignChartData?.installData}
+              color={colors.lineChartColor}
+              dataLabel="Installs"
+            />
+          </S.RowItem>
+        </S.Row>
+        <Popup
+          isOpen={popupVisibility}
+          hide={() => {
+            hidePopup();
+          }}
+          onAdd={handleAddingCampaign}
+        ></Popup>
+        <Snackbar
+          open={notificationVisibility}
+          autoHideDuration={2500}
+          onClose={hideNotification}
+          message={notificationMessage}
+        />
+      </S.Wrapper>
+    </S.StyledMotionDiv>
   );
 }
 

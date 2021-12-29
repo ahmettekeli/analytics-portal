@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledMotionDiv } from "pages/Overview/Overview.styles";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,3 +10,5 @@ export const Wrapper = styled.div`
   width: 100%;
   margin: auto;
 `;
+
+export { StyledMotionDiv };

@@ -6,7 +6,7 @@ function useNotification() {
     setVisible(true);
   }
   function hideNotification() {
-    setVisible(true);
+    setVisible(false);
   }
   return { showNotification, hideNotification, visible };
 }
