@@ -6,8 +6,8 @@ import Header from "components/Header/Header";
 import Home from "pages/Home/Home";
 import NotFound404 from "pages/NotFound404/NotFound404";
 import Overview from "pages/Overview/Overview";
-import { routes } from "configs";
 import GlobalStyle from "globalStyles";
+import { routes } from "configs";
 
 function App() {
   return (

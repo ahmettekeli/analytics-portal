@@ -1,6 +1,6 @@
-import * as S from "./CardList.styles";
 import { AppDataInterface } from "Interfaces";
 import Card from "../Card/Card";
+import * as S from "./CardList.styles";
 
 function CardList({ type, apps }: { type: string; apps: AppDataInterface[] }) {
   return (

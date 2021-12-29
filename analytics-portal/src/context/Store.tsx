@@ -6,6 +6,7 @@ import {
   useEffect,
 } from "react";
 import Reducer from "./Reducer";
+import useFetch from "useFetch";
 import { actionTypes } from "./ActionTypes";
 import {
   AppDataInterface,
@@ -13,7 +14,6 @@ import {
   AnalyticsStateType,
 } from "../Interfaces";
 import { CampaignType } from "campaign.types";
-import useFetch from "useFetch";
 
 const initialState: AnalyticsStateType = {
   appData: [],

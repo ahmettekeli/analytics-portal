@@ -1,5 +1,5 @@
-import { StyledHeader } from "./Header.styles";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import { StyledHeader } from "./Header.styles";
 
 function Header() {
   return (

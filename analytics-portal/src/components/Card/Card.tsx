@@ -12,8 +12,6 @@ function Card({ app }: { app: AppDataInterface }) {
   const avgRevenue = getAvgRevenue(app, campaigns.length);
   const avgInstalls = getAvgInstalls(app, campaigns.length);
 
-  //TODO currentApp doesn't get set in the global store if you enter a url /overview/:name
-  //find a way to dispatch with react router
   return (
     <S.Wrapper
       data-testid="Card"

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useAPI } from "context/Store";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
+import useNotification from "useNotification";
 import CardList from "../CardList/CardList";
 import * as S from "./CardContainer.styles";
-import useNotification from "useNotification";
 
 function CardContainer() {
   const {

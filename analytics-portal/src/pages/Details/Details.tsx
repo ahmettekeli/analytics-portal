@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
-import { actionTypes } from "context/ActionTypes";
-import { colors } from "configs";
-import { useAPI } from "context/Store";
 import usePopup from "usePopup";
 import useNotification from "useNotification";
 import CampaignControl from "components/CampaignControl/CampaignControl";
 import Popup from "components/Popup/Popup";
 import LineChart from "components/LineChart/LineChart";
 import OverviewProfile from "components/OverviewProfile/OverviewProfile";
+import { actionTypes } from "context/ActionTypes";
+import { colors } from "configs";
+import { useAPI } from "context/Store";
 import { AppDataInterface } from "Interfaces";
 import { AppChartDataType } from "app.types";
 import { CampaignChartDataType, CampaignType } from "campaign.types";
@@ -40,11 +40,20 @@ function Details() {
   }, [navigate]);
 
   function handleAddingCampaign(campaignName: string) {
+    //campaign name validation.
     if (!utils.isNameValid(campaignName)) {
       setNotificationMessage("Please enter a valid Campaign name");
       showNotification();
       return;
     }
+    if (
+      utils.campaignAlreadyExist(campaignName, currentApp as AppDataInterface)
+    ) {
+      setNotificationMessage("Campaign already exist");
+      showNotification();
+      return;
+    }
+    //adding campaign to the app.
     const newCampaign: CampaignType = utils.generateCampaign(campaignName);
     newCampaign.appId = (currentApp as AppDataInterface).id;
     dispatch({
@@ -69,7 +78,6 @@ function Details() {
     );
   }
 
-  //TODO - refactor this navigating 404 e gidip duruyor. overview/id path inde yenileyince 404 e yonlenmemeli.
   useEffect(() => {
     if (!isLoading && appData.length > 0) {
       //if url path is valid and appData is full then generate chartData for app

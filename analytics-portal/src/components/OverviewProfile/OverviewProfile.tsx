@@ -1,5 +1,5 @@
-import * as S from "./OverviewProfile.styles";
 import capitalize from "lodash/capitalize";
+import * as S from "./OverviewProfile.styles";
 
 function OverviewProfile({
   imgUrl,

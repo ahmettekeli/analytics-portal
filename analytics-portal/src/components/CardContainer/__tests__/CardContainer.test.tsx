@@ -15,12 +15,9 @@ describe("CardContainer", () => {
         <CardContainer />
       </AnalyticsProvider>
     );
-
-    console.log("render:", renderResult);
   });
 
   test("Renders CardContainer component", () => {
-    console.log("loading:", isLoading);
     expect(renderResult.getByTestId("CardContainer")).toBeInTheDocument();
   });
 

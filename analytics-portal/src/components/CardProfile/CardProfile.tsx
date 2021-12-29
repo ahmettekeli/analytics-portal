@@ -1,5 +1,5 @@
-import * as S from "./CardProfile.styles";
 import capitalize from "lodash/capitalize";
+import * as S from "./CardProfile.styles";
 
 function CardProfile({
   isActive,

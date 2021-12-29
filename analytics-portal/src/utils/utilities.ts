@@ -75,10 +75,12 @@ export function isCampaignPathValid(
   name: string,
   appData: AppDataInterface[]
 ): boolean {
-  console.log(
-    "validation result:",
-    appData.find((item) => item.name === name) !== undefined,
-    appData
-  );
   return appData.find((item) => item.name === name) !== undefined;
+}
+
+export function campaignAlreadyExist(
+  name: string,
+  app: AppDataInterface
+): boolean {
+  return app.campaigns.find((item) => item.name === name) !== undefined;
 }
