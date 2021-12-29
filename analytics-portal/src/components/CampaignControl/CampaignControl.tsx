@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import * as S from "./CampaignControl.styles";
-import { CampaignType } from "../../context/Interfaces";
+import { CampaignType } from "campaign.types";
 
 function CampaignControl({
   campaignList,
@@ -20,8 +20,6 @@ function CampaignControl({
   const [campaign, setCampaign] = useState("");
 
   function populateMenuItems(campaignList: CampaignType[]) {
-    //TODO prevent unnecessary rerenders here and on add campaign button click.
-    console.log("populating menu items with:", campaignList);
     if (campaignList) {
       return campaignList.map((campaign) => {
         return (

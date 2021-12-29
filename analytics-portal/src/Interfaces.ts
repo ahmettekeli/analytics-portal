@@ -1,22 +1,14 @@
-import { actionTypes } from "./ActionTypes";
+import { actionTypes } from "./context/ActionTypes";
+import { CampaignType } from "campaign.types";
 
-//base interface olusturup app ve campaign icin onlardan turetilebilir.
-//2 dosya olsun, app.interface.ts ve campaign.interface.ts
-//app.types.ts ve campaign.types.ts olabilir.
-
-//Install interface {
-//   day:
-//   value:
-//   id?:
-//   appId?:
-// }
-
-export interface AppInstallInterface {
+export interface InstallInterface {
   day: string;
   value: number;
-  id: string;
-  appId: string;
+  id?: string;
+  appId?: string;
 }
+
+export interface AppInstallInterface extends InstallInterface {}
 
 export interface RevenueInterface {
   day: string;
@@ -25,10 +17,7 @@ export interface RevenueInterface {
   appId: string;
 }
 
-export interface CampaignInstallInterface {
-  day: string;
-  value: number;
-}
+export interface CampaignInstallInterface extends InstallInterface {}
 
 export interface AppDataInterface {
   createdAt: Date;
@@ -40,13 +29,6 @@ export interface AppDataInterface {
   revenue: RevenueInterface[];
   campaigns: CampaignType[];
 }
-
-export type CampaignType = {
-  name: string;
-  installs: CampaignInstallInterface[];
-  id: string;
-  appId?: string;
-};
 
 export type AnalyticsStateType =
   | {
@@ -77,15 +59,3 @@ export type ContextActionType =
       type: actionTypes.SET_CURRENT_APP;
       payload: AppDataInterface;
     };
-
-export type AppChartDataType = {
-  installLabels: string[];
-  installData: number[];
-  revenueLabels: string[];
-  revenueData: number[];
-};
-
-export type CampaignChartDataType = {
-  installLabels: string[];
-  installData: number[];
-};

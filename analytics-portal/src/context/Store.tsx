@@ -11,8 +11,8 @@ import {
   AppDataInterface,
   ContextActionType,
   AnalyticsStateType,
-  CampaignType,
-} from "./Interfaces";
+} from "../Interfaces";
+import { CampaignType } from "campaign.types";
 import useFetch from "useFetch";
 
 const initialState: AnalyticsStateType = {

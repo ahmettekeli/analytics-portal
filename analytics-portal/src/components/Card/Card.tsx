@@ -1,5 +1,5 @@
 import { actionTypes } from "context/ActionTypes";
-import { AppDataInterface } from "context/Interfaces";
+import { AppDataInterface } from "Interfaces";
 import CardProfile from "../CardProfile/CardProfile";
 import CardDetail from "../CardDetail/CardDetail";
 import { getAvgInstalls, getAvgRevenue } from "utils/utilities";

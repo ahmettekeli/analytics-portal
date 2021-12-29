@@ -1,7 +1,4 @@
-import {
-  AppDataInterface,
-  AppInstallInterface,
-} from "../../context/Interfaces";
+import { AppDataInterface, AppInstallInterface } from "../../Interfaces";
 import {
   formatDate,
   getAvgInstalls,

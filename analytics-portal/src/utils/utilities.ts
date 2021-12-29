@@ -1,10 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import {
-  AppDataInterface,
-  AppChartDataType,
-  CampaignChartDataType,
-  CampaignType,
-} from "../context/Interfaces";
+import { AppDataInterface } from "../Interfaces";
+import { AppChartDataType } from "app.types";
+import { CampaignChartDataType, CampaignType } from "campaign.types";
 
 const dummyCampaignData = [
   { day: "Day 1" },
@@ -74,6 +71,14 @@ export function getCampaignChartData(
   };
 }
 
-export function isCampaignPathValid(name: string, appName: string): boolean {
-  return name === appName;
+export function isCampaignPathValid(
+  name: string,
+  appData: AppDataInterface[]
+): boolean {
+  console.log(
+    "validation result:",
+    appData.find((item) => item.name === name) !== undefined,
+    appData
+  );
+  return appData.find((item) => item.name === name) !== undefined;
 }

@@ -2,34 +2,28 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import { actionTypes } from "context/ActionTypes";
-import { useAPI } from "context/Store";
 import { colors } from "configs";
+import { useAPI } from "context/Store";
+import usePopup from "usePopup";
+import useNotification from "useNotification";
 import CampaignControl from "components/CampaignControl/CampaignControl";
 import Popup from "components/Popup/Popup";
 import LineChart from "components/LineChart/LineChart";
 import OverviewProfile from "components/OverviewProfile/OverviewProfile";
+import { AppDataInterface } from "Interfaces";
+import { AppChartDataType } from "app.types";
+import { CampaignChartDataType, CampaignType } from "campaign.types";
 import * as S from "./Details.styles";
 import * as utils from "utils/utilities";
-import {
-  AppDataInterface,
-  AppChartDataType,
-  CampaignChartDataType,
-  CampaignType,
-} from "context/Interfaces";
-import usePopup from "usePopup";
-import useNotification from "useNotification";
 
 function Details() {
   const { name } = useParams();
+  const navigate = useNavigate();
   const {
     state: { appData, currentApp, isLoading, errorMessage },
     dispatch,
   } = useAPI();
-
-  const navigate = useNavigate();
-
   const { visible: popupVisibility, hidePopup, showPopup } = usePopup();
-
   const {
     showNotification,
     hideNotification,
@@ -37,23 +31,14 @@ function Details() {
   } = useNotification();
 
   const [notificationMessage, setNotificationMessage] = useState("");
-
   const [appChartData, setAppChartData] = useState<AppChartDataType>();
   const [campaignChartData, setCampaignChartData] =
     useState<CampaignChartDataType>();
-
-  const isCampaignPathValid = useCallback(() => {
-    return utils.isCampaignPathValid(
-      name as string,
-      currentApp?.name as string
-    );
-  }, [currentApp, name]);
 
   const navigateTo404 = useCallback(() => {
     navigate("/404", { replace: true });
   }, [navigate]);
 
-  //TODO - refactor this
   function handleAddingCampaign(campaignName: string) {
     if (!utils.isNameValid(campaignName)) {
       setNotificationMessage("Please enter a valid Campaign name");
@@ -62,7 +47,6 @@ function Details() {
     }
     const newCampaign: CampaignType = utils.generateCampaign(campaignName);
     newCampaign.appId = (currentApp as AppDataInterface).id;
-    console.log({ currentApp });
     dispatch({
       type: actionTypes.ADD_CAMPAIGN,
       payload: {
@@ -87,8 +71,10 @@ function Details() {
 
   //TODO - refactor this navigating 404 e gidip duruyor. overview/id path inde yenileyince 404 e yonlenmemeli.
   useEffect(() => {
-    if (!isLoading) {
-      if (isCampaignPathValid()) {
+    if (!isLoading && appData.length > 0) {
+      //if url path is valid and appData is full then generate chartData for app
+      if (utils.isCampaignPathValid(name as string, appData)) {
+        //currentApp undefined geliyor ve isPathValid false donup 404 e yonleniyor.
         const tempCurrentApp = appData.find((app) => app.name === name);
         setAppChartData(
           utils.getAppChartData(tempCurrentApp as AppDataInterface)
@@ -98,25 +84,17 @@ function Details() {
             type: actionTypes.SET_CURRENT_APP,
             payload: tempCurrentApp as AppDataInterface,
           });
-          console.log("currentApp was undefined,", tempCurrentApp, name);
         }
       } else {
-        console.log("navigating to 404");
-        // navigateTo404();
+        //if appData is full but not valid path then navigate to 404
+        navigateTo404();
       }
       if (errorMessage) {
         setNotificationMessage(errorMessage);
         showNotification();
       }
     }
-  }, [
-    isLoading,
-    appData,
-    name,
-    errorMessage,
-    isCampaignPathValid,
-    navigateTo404,
-  ]);
+  }, [isLoading, appData, name, errorMessage]);
 
   if (!currentApp) {
     return null;

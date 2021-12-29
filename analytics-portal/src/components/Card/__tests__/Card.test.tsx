@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import renderer from "react-test-renderer";
 import Card from "../Card";
 import { BrowserRouter as Router } from "react-router-dom";
-import { AppDataInterface } from "../../../context/Interfaces";
+import { AppDataInterface } from "../../../Interfaces";
 
 describe("Card", () => {
   let activeApp: AppDataInterface;

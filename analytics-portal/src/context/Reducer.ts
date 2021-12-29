@@ -4,7 +4,7 @@ import {
   AppCampaignType,
   AppDataInterface,
   ContextActionType,
-} from "./Interfaces";
+} from "../Interfaces";
 
 const getAnalyticsData = (
   state: AnalyticsStateType,
