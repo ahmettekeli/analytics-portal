@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { StyledApp } from "./App.styles";
-import AnalyticsProvider from "../../context/Store";
-import Details from "../../pages/Details/Details";
-import Header from "../../components/Header/Header";
-import Home from "../../pages/Home/Home";
-import NotFound404 from "../../pages/NotFound404/NotFound404";
-import Overview from "../../pages/Overview/Overview";
-import { routes } from "../../configs";
-import GlobalStyle from "../../globalStyles";
+import AnalyticsProvider from "context/Store";
+import Details from "pages/Details/Details";
+import Header from "components/Header/Header";
+import Home from "pages/Home/Home";
+import NotFound404 from "pages/NotFound404/NotFound404";
+import Overview from "pages/Overview/Overview";
+import { routes } from "configs";
+import GlobalStyle from "globalStyles";
 
 function App() {
   return (

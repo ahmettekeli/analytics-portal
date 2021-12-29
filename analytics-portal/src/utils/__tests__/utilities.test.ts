@@ -11,6 +11,7 @@ import {
   getCampaignChartData,
   getRandomValue,
   isNameValid,
+  isCampaignPathValid,
 } from "../utilities";
 
 describe("Utility functions", () => {

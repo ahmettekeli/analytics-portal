@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import { actionTypes } from "context/ActionTypes";
 import { useAPI } from "context/Store";
@@ -26,9 +26,7 @@ function Details() {
     dispatch,
   } = useAPI();
 
-  const location = useLocation();
   const navigate = useNavigate();
-  const pathnames = location.pathname.split("/").filter((x) => x);
 
   const { visible: popupVisibility, hidePopup, showPopup } = usePopup();
 
@@ -45,8 +43,11 @@ function Details() {
     useState<CampaignChartDataType>();
 
   const isCampaignPathValid = useCallback(() => {
-    return utils.isCampaignPathValid(pathnames, currentApp?.name as string);
-  }, [currentApp]);
+    return utils.isCampaignPathValid(
+      name as string,
+      currentApp?.name as string
+    );
+  }, [currentApp, name]);
 
   const navigateTo404 = useCallback(() => {
     navigate("/404", { replace: true });
@@ -84,21 +85,29 @@ function Details() {
     );
   }
 
+  //TODO - refactor this navigating 404 e gidip duruyor. overview/id path inde yenileyince 404 e yonlenmemeli.
   useEffect(() => {
-    if (isCampaignPathValid()) {
-      if (!isLoading) {
+    if (!isLoading) {
+      if (isCampaignPathValid()) {
         const tempCurrentApp = appData.find((app) => app.name === name);
         setAppChartData(
           utils.getAppChartData(tempCurrentApp as AppDataInterface)
         );
+        if (currentApp === undefined) {
+          dispatch({
+            type: actionTypes.SET_CURRENT_APP,
+            payload: tempCurrentApp as AppDataInterface,
+          });
+          console.log("currentApp was undefined,", tempCurrentApp, name);
+        }
+      } else {
+        console.log("navigating to 404");
+        // navigateTo404();
       }
       if (errorMessage) {
         setNotificationMessage(errorMessage);
         showNotification();
       }
-    } else {
-      console.log("navigating to 404");
-      navigateTo404();
     }
   }, [
     isLoading,
