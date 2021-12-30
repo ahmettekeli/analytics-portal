@@ -3,7 +3,6 @@ import renderer from "react-test-renderer";
 import OverviewProfile from "../OverviewProfile";
 import { BrowserRouter as Router } from "react-router-dom";
 import { formatDate } from "utils/utilities";
-import { after } from "lodash";
 
 describe("OverviewProfile", () => {
   const imgUrl = "http://placeimg.com/640/480/abstract";
@@ -29,17 +28,16 @@ describe("OverviewProfile", () => {
     expect(renderResult.getByTestId("OverviewProfile")).toBeInTheDocument();
   });
 
-  test("Has correct profile image", () => {
+  test("Should have correct profile image", () => {
     expect(
       renderResult.getByTestId("OverviewProfile").getElementsByTagName("img")[0]
         .src
     ).toBe(imgUrl);
   });
 
-  test("Has correct name", () => {});
-  //TODO
-  test("Has correct created at date", () => {});
-  //TODO
+  test("Should have correct name", () => {});
+  test("Should have correct created at date", () => {});
+
   test("OverviewProfile matches snapshot", () => {
     const tree = renderer
       .create(

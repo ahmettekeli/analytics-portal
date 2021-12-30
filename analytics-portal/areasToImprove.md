@@ -4,6 +4,5 @@
 4- Caching - Local storage usage for persistent global state.
 5- Detail page refactoring
 6- Generalizing custom hooks for similar tasks.
-7- Favicon change
+7- Increase responsivity
 8- Making it mobile friendly
-9- Increase responsivity

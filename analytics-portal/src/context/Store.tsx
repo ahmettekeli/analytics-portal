@@ -47,10 +47,9 @@ function AnalyticsProvider({ children }: { children: ReactNode }) {
     process.env.REACT_APP_CAMPAIGN_ENDPOINT as string
   );
 
-  let tempAppData: AppDataInterface[] = [];
-  let tempCampaignData: CampaignType[] = [];
-
   useEffect(() => {
+    let tempAppData: AppDataInterface[] = [];
+    let tempCampaignData: CampaignType[] = [];
     if (!isAppLoading && !isAppError) {
       if (!isCampaignLoading && !isCampaignError) {
         //if there is no campaign fetching error, then we can add campaigns to appData

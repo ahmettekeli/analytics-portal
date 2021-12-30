@@ -24,12 +24,12 @@ describe("CardDetail", () => {
     expect(renderResult.getByTestId("card-detail")).toBeInTheDocument();
   });
 
-  test("Renders campaign count correctly", () => {
+  test("Should show campaign count correctly", () => {
     expect(
       renderResult.getAllByText("Campaigns")[0].previousSibling
     ).toHaveTextContent(campaignCount.toString());
   });
-  test("Renders Avg. Installs and Avg. Revenue correctly", () => {
+  test("Should show Avg. Installs and Avg. Revenue correctly", () => {
     expect(
       renderResult.getAllByText("Avg. Installs")[0].previousSibling
     ).toHaveTextContent(avgInstalls.toString());

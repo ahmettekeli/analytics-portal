@@ -18,6 +18,9 @@ describe("Popop", () => {
     expect(renderResult.getByTestId("Popup")).toBeInTheDocument();
   });
 
+  test("Should hide when clicked else where.", () => {});
+  test("Should hide when clicked new campaign button", () => {});
+
   //TODO: open issue about snapshot testing on material ui modals -> https://github.com/mui-org/material-ui/issues/9243
   // test("Popup matches snapshot", () => {
   //   const tree = renderer

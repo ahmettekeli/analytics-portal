@@ -126,9 +126,6 @@ describe("Card", () => {
     expect(renderResult.getByTestId("card")).toBeInTheDocument();
   });
 
-  //TODO
-  test("Renders inactive Card faded", () => {});
-
   test("Card has correct image and name", () => {
     expect(
       renderResult.getByTestId("card").getElementsByTagName("img")[0].src
@@ -136,12 +133,11 @@ describe("Card", () => {
     expect(renderResult.getByText(activeApp.name)).toBeInTheDocument();
   });
 
+  test("Renders inactive Card faded", () => {});
   test("Card has correct campaigns value", () => {});
-  //TODO
   test("Card has correct avg installs value", () => {});
-  //TODO
   test("Card has correct avg revenue value", () => {});
-  //TODO
+  test("Should redirect to overview/:id when the card is clicked", () => {});
 
   test("Card matches snapshot", () => {
     const tree = renderer

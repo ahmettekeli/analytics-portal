@@ -5,22 +5,7 @@ import Details from "../Details";
 
 //TODO - add tests
 describe("Detail", () => {
-  test("dummy test", () => {
-    expect(true).toBe(true);
-  });
-  //   let renderResult: ReturnType<typeof render>;
-  //   beforeEach(() => {
-  //     renderResult = render(
-  //       <MemoryRouter initialEntries={["/overview/id"]}>
-  //         <Details />
-  //       </MemoryRouter>
-  //     );
-  //   });
-  //   afterEach(cleanup);
-
-  //   test("Renders Detail component", async () => {
-  //     expect(renderResult.getByTestId("details")).toBeInTheDocument();
-  //   });
+  test("Renders Detail component", () => {});
 
   //   test("Detail matches snapshot", () => {
   //     const tree = renderer

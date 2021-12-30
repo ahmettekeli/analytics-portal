@@ -40,11 +40,31 @@ describe("CampaignControl", () => {
   });
   afterEach(cleanup);
 
-  it("Renders CampaignControl component", () => {
+  test("Renders CampaignControl component", () => {
     expect(renderResult.getByTestId("campaign-control")).toBeInTheDocument();
   });
 
-  it("CampaignControl matches snapshot", () => {
+  test("Renders new campaign button disabled", () => {});
+
+  test("Should not open popup when new campaign button is clicked if the app is inactive", () => {});
+
+  test("Should fill line chart when campaign is selected from the dropdown", () => {});
+
+  test("Should open popup when new campaign button is clicked", () => {});
+
+  test("Should add campaign to the dropdown when new campaign is added", () => {});
+
+  test("Should render success message when new campaign is added", () => {});
+
+  test("Should close popup after adding campaign", () => {});
+
+  test("Should not add campaign to the dropdown when campaign name already exists in the dropdown", () => {});
+
+  test("Should close popup after trying adding campaign with an existing campaign name", () => {});
+
+  test("Should render error message when new campaign is not added", () => {});
+
+  test("CampaignControl matches snapshot", () => {
     const tree = renderer
       .create(
         <CampaignControl

@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Analytics Portal - Sample Web Pages - Sunday Frontend Engineer Take Home Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Build with Typescript - React - React Router - Styled Components [Live Demo](https://gildedrose.netlify.app/)
 
-## Available Scripts
+## About The Project
 
-In the project directory, you can run:
+<p>This is a sample analytics portal project to display app data and related campaign data. Each app has its own campaigns, install, revenue information that are retrieved from related api endpoints and they are displayed in overview page  More detailed information and line chart infographics are displayed in detail page which can be accessed by clicking the an app on overview page. Campaigns that are related to the app will be listed in a dropdown select component, a line chart will be populated when a campaign is selected from the dropdown. New campaigns can be added by new campaign button below campaign dropdown. Newly added campaigns will be listed in the dropdown with randomly created data.</p>
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The tools/software below are needed to build/extend this project.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [node](https://nodejs.org/en/)
 
-### `npm test`
+- npm
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm install npm@latest -g
+```
 
-### `npm run build`
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Editing/Extending/Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Unzip the file
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Open it in a code editor
 
-### `npm run eject`
+3. Install NPM packages
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Make changes and improve
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4. Start the local server and see the changes you make as you save
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+npm start
+```
 
-## Learn More
+5. Run tests in watch mode and see the test coverage and implement more tests and see if they pass
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```sh
+npm test
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Ahmet Tekeli - [@ahmettekeli3](https://twitter.com/ahmettekeli3) - ahmettekeli1991@hotmail.com
+[linkedin-url]: https://www.linkedin.com/in/tekeliahmet/

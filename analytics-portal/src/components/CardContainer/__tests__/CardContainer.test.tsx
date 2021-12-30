@@ -14,18 +14,14 @@ describe("CardContainer", () => {
   });
   afterEach(cleanup);
 
-  test("Shows loading bar on loading", () => {
+  test("Should show loading bar when loading", () => {
     expect(renderResult.getByTestId("loading-bar")).toBeInTheDocument();
   });
 
-  //TODO have context store mock with isLoading false;
-  // test("Renders CardContainer component", () => {
-  //   expect(renderResult.getByTestId("card-container")).toBeInTheDocument();
-  // });
+  // TODO have context store mock with isLoading false;
+  test("Renders CardContainer component", () => {});
 
-  // test("Renders seperation line between active-inactive apps", () => {
-  //   expect(renderResult.getByTestId("app-seperation-line")).toBeInTheDocument();
-  // });
+  test("Renders seperation line between active-inactive apps", () => {});
 
   test("CardContainer matches snapshot", () => {
     const tree = renderer

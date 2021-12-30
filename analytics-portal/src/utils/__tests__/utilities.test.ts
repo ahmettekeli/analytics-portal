@@ -204,8 +204,6 @@ describe("Utility functions", () => {
 
   test("Should format date correctly", () => {
     const date = new Date("2021-11-03T12:33:53.023Z");
-    console.log("date", date);
-    console.log("formatted", formatDate(date));
     expect(formatDate(date)).toBe("03.11.2021");
   });
 });
