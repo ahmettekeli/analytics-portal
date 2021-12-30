@@ -1,10 +1,10 @@
 # Analytics Portal - Sample Web Pages - Sunday Frontend Engineer Take Home Task
 
-## Build with Typescript - React - React Router - Styled Components [Live Demo](https://gildedrose.netlify.app/)
+## Build with Typescript - React - React Router - Styled Components
 
 ## About The Project
 
-<p>This is a sample analytics portal project to display app data and related campaign data. Each app has its own campaigns, install, revenue information that are retrieved from related api endpoints and they are displayed in overview page  More detailed information and line chart infographics are displayed in detail page which can be accessed by clicking the an app on overview page. Campaigns that are related to the app will be listed in a dropdown select component, a line chart will be populated when a campaign is selected from the dropdown. New campaigns can be added by new campaign button below campaign dropdown. Newly added campaigns will be listed in the dropdown with randomly created data.</p>
+This is a sample analytics portal project to display app data and related campaign data. Each app has its own campaigns, install, revenue information that are retrieved from related api endpoints and they are displayed in overview page More detailed information and line chart infographics are displayed in detail page which can be accessed by clicking the an app on overview page. Campaigns that are related to the app will be listed in a dropdown select component, a line chart will be populated when a campaign is selected from the dropdown. New campaigns can be added by new campaign button below campaign dropdown. Newly added campaigns will be listed in the dropdown with randomly created data.
 
 ### Prerequisites
 
