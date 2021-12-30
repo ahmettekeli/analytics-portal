@@ -49,7 +49,7 @@ function Details() {
     if (
       utils.campaignAlreadyExist(campaignName, currentApp as AppDataInterface)
     ) {
-      setNotificationMessage("Campaign already exist");
+      setNotificationMessage("Campaign already exists");
       showNotification();
       return;
     }
