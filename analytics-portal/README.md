@@ -46,6 +46,8 @@ npm start
 npm test
 ```
 
+ps: Snapshot tests will fail on first test run, update them with pressin "u" and rerun the test.
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
