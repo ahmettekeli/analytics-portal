@@ -6,7 +6,7 @@ type PropType = { isActive: boolean };
 export const Wrapper = styled.div<PropType>`
   display: flex;
   justify-content: space-around;
-  margin: 0.5rem; //TODO 0.5 constan gelebilir. gap.sm vs .
+  margin: 0.5rem;
   opacity: ${(props) => (props.isActive ? 1 : 0.5)};
 
   @media (max-width: 630px) {

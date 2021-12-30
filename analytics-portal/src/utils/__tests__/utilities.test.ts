@@ -1,4 +1,4 @@
-import { AppDataInterface, AppInstallInterface } from "Interfaces";
+import { AppDataInterface } from "Interfaces";
 import {
   campaignAlreadyExist,
   formatDate,
@@ -11,8 +11,6 @@ import {
   isNameValid,
   isCampaignPathValid,
 } from "../utilities";
-
-//TODO - add tests for all functions
 
 describe("Utility functions", () => {
   let app: AppDataInterface = {

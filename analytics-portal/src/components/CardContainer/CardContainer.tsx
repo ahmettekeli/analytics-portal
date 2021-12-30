@@ -45,12 +45,12 @@ function CardContainer() {
       <CardList type="active" apps={activeApps}></CardList>
       <S.StyledLine width="80%" data-testid="app-seperation-line" />
       <CardList type="inactive" apps={inactiveApps}></CardList>
-      <Snackbar
+      {/* <Snackbar
         open={alertVisibility}
-        autoHideDuration={6000}
+        autoHideDuration={2500}
         onClose={hideNotification}
         message={errorMessage}
-      />
+      /> */}
     </S.Wrapper>
   );
 }

@@ -1,7 +1,7 @@
 import { cleanup, render } from "@testing-library/react";
+import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import Breadcrumbs from "../Breadcrumbs";
-import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
 
 describe("Breadcrumbs", () => {
   let renderResult: ReturnType<typeof render>;

@@ -28,6 +28,3 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `;
-
-//TODO add media query for mobile.
-//below 600px width
