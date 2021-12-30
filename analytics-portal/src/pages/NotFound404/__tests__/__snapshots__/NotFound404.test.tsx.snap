@@ -2,14 +2,23 @@
 
 exports[`NotFound404 NotFound404 matches snapshot 1`] = `
 <div
-  className="sc-bdvvtL fsAlg"
-  data-testid="NotFound404"
+  className="sc-bdvvtL eILeqO"
+  style={
+    Object {
+      "opacity": 0,
+    }
+  }
 >
-  <h1>
-    404
-  </h1>
-  <h2>
-    Page not found
-  </h2>
+  <div
+    className="sc-gsDKAQ iXaYUF"
+    data-testid="not-found-404"
+  >
+    <h1>
+      404
+    </h1>
+    <h2>
+      Page not found
+    </h2>
+  </div>
 </div>
 `;

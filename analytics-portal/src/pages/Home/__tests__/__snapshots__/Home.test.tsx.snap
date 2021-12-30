@@ -2,7 +2,7 @@
 
 exports[`Home Home matches snapshot 1`] = `
 <div
-  data-testid="Home"
+  data-testid="home"
   style={
     Object {
       "opacity": 0,

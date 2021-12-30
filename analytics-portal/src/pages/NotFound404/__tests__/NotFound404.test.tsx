@@ -5,7 +5,7 @@ import NotFound404 from "../NotFound404";
 describe("NotFound404", () => {
   test("Renders NotFound404 component", () => {
     const renderResult = render(<NotFound404 />);
-    expect(renderResult.getByTestId("NotFound404")).toBeInTheDocument();
+    expect(renderResult.getByTestId("not-found-404")).toBeInTheDocument();
   });
 
   test("NotFound404 matches snapshot", () => {

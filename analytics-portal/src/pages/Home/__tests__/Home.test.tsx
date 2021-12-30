@@ -13,7 +13,7 @@ describe("Home", () => {
     );
   });
   test("Renders Home component", () => {
-    expect(renderResult.getByTestId("Home")).toBeInTheDocument();
+    expect(renderResult.getByTestId("home")).toBeInTheDocument();
   });
 
   test("Overview button redirects to Overview page", () => {

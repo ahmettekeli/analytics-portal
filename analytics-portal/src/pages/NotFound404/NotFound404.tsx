@@ -7,7 +7,7 @@ function NotFound404() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Wrapper data-testid="NotFound404">
+      <Wrapper data-testid="not-found-404">
         <h1>404</h1>
         <h2>Page not found</h2>
       </Wrapper>
