@@ -1,4 +1,4 @@
-# Analytics Portal - Sample Web Pages - Sunday Frontend Engineer Take Home Task
+# Analytics Portal - Sample Web Pages
 
 ## Build with Typescript - React - React Router - Styled Components
 
