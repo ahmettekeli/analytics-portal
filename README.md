@@ -22,7 +22,7 @@ npm install npm@latest -g
 
 ### Editing/Extending/Usage
 
-1. Unzip the file
+1. Unzip the file / git clone https://github.com/ahmettekeli/analytics-portal.git
 
 2. Open it in a code editor
 
